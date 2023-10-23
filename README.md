@@ -1,3 +1,3 @@
-Frontend framework: React
+Frontend framework: React with Typescript
 
 Backend framework: Spring

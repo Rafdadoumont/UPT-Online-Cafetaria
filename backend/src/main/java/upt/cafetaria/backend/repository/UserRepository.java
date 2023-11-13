@@ -1,4 +1,8 @@
 package upt.cafetaria.backend.repository;
 
-public class UserRepository {
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import upt.cafetaria.backend.model.domain.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
 }

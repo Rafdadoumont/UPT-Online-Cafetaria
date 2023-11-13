@@ -1,30 +1,20 @@
-package upt.cafetaria.backend.model.product;
+package upt.cafetaria.backend.model.web;
 
-import jakarta.persistence.*;
-import upt.cafetaria.backend.model.Reservation;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import java.util.List;
-
-@Entity
-@Table(name = "product")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDto {
     private long id;
 
+    @NotEmpty(message = "product.name.empty")
     private String name;
 
-    private double price;
+    @NotNull(message = "product.price.null")
+    @Min(value = 0, message = "product.price.min.0")
+    private Double price;
 
     private String description;
-
-    public Product() {}
-
-    public Product(String name, double price, String description) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-    }
 
     public long getId() {
         return id;
@@ -42,11 +32,11 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -10,3 +10,6 @@ Designed, developed and tested by:
 
 
 ## Backend framework: Spring
+### Documentation
+All API endpoints are testable with the Swagger UI accessable on:
+http://localhost:8080/swagger-ui/index.html#/

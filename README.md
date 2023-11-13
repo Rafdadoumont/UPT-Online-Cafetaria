@@ -2,7 +2,7 @@
 Designed, developed and tested by:
 - 48543 Rainier Bastiaans
 - 48542 Raf Dadoumont
-- J
+- 48519 Jan Wieprow
 - R
 
 ## Frontend framework: React with Typescript

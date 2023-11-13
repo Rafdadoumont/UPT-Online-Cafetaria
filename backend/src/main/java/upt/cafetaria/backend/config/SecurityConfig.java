@@ -10,9 +10,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+    private static final String[] WHITE_LIST_URL = {"/api/auth/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/swagger-ui.html"};
 
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
@@ -29,46 +42,15 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user, admin);
     }
 
-/*    @Autowired
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        return http
-                .csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/home").permitAll()
-                .requestMatchers("/login").permitAll()
-                .requestMatchers("/team/overview/**").hasRole("USER")
-                .requestMatchers("/regatta/overview/**").hasRole("USER")
-                .requestMatchers("/storage/overview/**").hasRole("USER")
-                .requestMatchers("/boat/overview/**").hasRole("USER")
-                .requestMatchers("/team/add/**").hasRole("ADMIN")
-                .requestMatchers("/regatta/add/**").hasRole("ADMIN")
-                .requestMatchers("/storage/add/**").hasRole("ADMIN")
-                .requestMatchers("/boat/add/**").hasRole("ADMIN")
-                .requestMatchers("/team/delete/**").hasRole("ADMIN")
-                .requestMatchers("/regatta/delete/**").hasRole("ADMIN")
-                .requestMatchers("/storage/delete/**").hasRole("ADMIN")
-                .requestMatchers("/boat/delete/**").hasRole("ADMIN")
-                .requestMatchers("/team/update/**").hasRole("ADMIN")
-                .requestMatchers("/regatta/update/**").hasRole("ADMIN")
-                .requestMatchers("/storage/update/**").hasRole("USER")
-                .requestMatchers("/boat/update/**").hasRole("ADMIN")
-                .requestMatchers("/api/**").permitAll()
-                // ADDED FOR H2 ACCESS VIA BROWSER
-                .requestMatchers("/h2/**").permitAll()
-                .and()
-                .headers().frameOptions().disable()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .deleteCookies("JSESSIONID")
-                .and()
-                .build();
-    }*/
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers(antMatcher("/api/**")).permitAll();
+                    auth.anyRequest().authenticated();
+                });
+        return http.build();
+    }
 
 /*    @Bean
     public SpringSecurityDialect springSecurityDialect() {

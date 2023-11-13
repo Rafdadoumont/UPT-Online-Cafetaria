@@ -3,7 +3,7 @@ package upt.cafetaria.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upt.cafetaria.backend.exceptions.ServiceException;
-import upt.cafetaria.backend.model.product.Product;
+import upt.cafetaria.backend.model.domain.Product;
 import upt.cafetaria.backend.model.web.ProductDto;
 import upt.cafetaria.backend.repository.ProductRepository;
 

@@ -1,8 +1,9 @@
-package upt.cafetaria.backend.model;
+package upt.cafetaria.backend.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import upt.cafetaria.backend.model.product.Product;
+import upt.cafetaria.backend.model.domain.Product;
+import upt.cafetaria.backend.model.domain.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,9 +23,13 @@ public class Reservation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "reservation_product")
+    @ManyToMany
+    @JoinTable(
+            name = "reservation_product",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<Product> products;
-
 
     public Reservation() {}
 

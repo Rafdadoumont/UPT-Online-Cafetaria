@@ -1,7 +1,6 @@
-package upt.cafetaria.backend.model.product;
+package upt.cafetaria.backend.model.domain;
 
 import jakarta.persistence.*;
-import upt.cafetaria.backend.model.Reservation;
 
 import java.util.List;
 
@@ -17,6 +16,9 @@ public class Product {
     private double price;
 
     private String description;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Reservation> reservations;
 
     public Product() {}
 

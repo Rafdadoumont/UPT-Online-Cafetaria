@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from "react";
 import { Product as ProductType } from "@/types";
+import {ProductTable} from "@/app/product/components/product-table";
+import {ProductForm} from "@/app/product/components/product-form";
 
 export default function ProductPage() {
     const [products, setProducts] = useState<ProductType[]>([]);
@@ -10,7 +12,6 @@ export default function ProductPage() {
             try {
                 const res = await fetch('http://localhost:8080/api/product/all');
                 const data = await res.json();
-                console.log(data);
                 setProducts(data);
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -20,17 +21,9 @@ export default function ProductPage() {
     }, []);
 
     return (
-        <div>
-            <h1>Products</h1>
-            <ul>
-                {products.map(product => (
-                    <li key={product.id}>
-                        <h3>{product.name}</h3>
-                        <p>Price: ${product.price}</p>
-                        <p>Description: {product.description}</p>
-                    </li>
-                ))}
-            </ul>
+        <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+            <ProductTable products={products} />
+            <ProductForm />
         </div>
     );
 }

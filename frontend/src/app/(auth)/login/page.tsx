@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { UserLoginForm } from "@/app/login/components/user-login-form";
+import { UserLoginForm } from "@/app/(auth)/login/components/user-login-form";
 
 export const metadata: Metadata = {
     title: "Log in",

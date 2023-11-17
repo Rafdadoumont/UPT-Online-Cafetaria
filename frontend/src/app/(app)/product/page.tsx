@@ -21,7 +21,7 @@ export default function ProductPage() {
     }, []);
 
     return (
-        <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+        <div className="container relative hidden h-max p-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
             <ProductTable products={products} />
             <ProductForm />
         </div>

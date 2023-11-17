@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Drink;
+import upt.cafetaria.backend.model.domain.SugarLevelEnum;
 import upt.cafetaria.backend.model.web.DrinkDto;
 import upt.cafetaria.backend.repository.DrinkRepository;
 
@@ -48,5 +49,9 @@ public class DrinkService {
 
     public void deleteDrink(Long id) {
         drinkRepository.delete(getDrink(id));
+    }
+
+    public List<SugarLevelEnum> getSugarLevels() {
+        return List.of(SugarLevelEnum.values());
     }
 }

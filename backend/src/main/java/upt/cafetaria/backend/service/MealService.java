@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Meal;
+import upt.cafetaria.backend.model.domain.MealTypeEnum;
 import upt.cafetaria.backend.model.web.MealDto;
 import upt.cafetaria.backend.repository.MealRepository;
 
@@ -43,5 +44,9 @@ public class MealService {
 
     public void deleteMeal(Long id) {
         mealRepository.delete(getMeal(id));
+    }
+
+    public List<MealTypeEnum> getMealTypes() {
+        return List.of(MealTypeEnum.values());
     }
 }

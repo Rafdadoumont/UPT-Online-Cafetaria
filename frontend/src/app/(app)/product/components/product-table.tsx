@@ -12,7 +12,7 @@ export function ProductTable({products}: ProductTableProps) {
             <TableCaption>An overview of available products</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Id</TableHead>
+                    <TableHead>Id</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Price</TableHead>
                     <TableHead>Description</TableHead>

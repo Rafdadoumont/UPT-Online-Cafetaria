@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Meal;
+import upt.cafetaria.backend.model.domain.MealTypeEnum;
 import upt.cafetaria.backend.model.web.MealDto;
 import upt.cafetaria.backend.service.MealService;
 
@@ -41,5 +42,10 @@ public class MealController {
         Meal deletedMeal = mealService.getMeal(id);
         mealService.deleteMeal(id);
         return deletedMeal;
+    }
+
+    @GetMapping("/mealtypes")
+    public List<MealTypeEnum> allMealTypes() {
+        return mealService.getMealTypes();
     }
 }

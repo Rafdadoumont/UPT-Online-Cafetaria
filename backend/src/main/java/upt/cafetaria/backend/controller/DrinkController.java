@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Drink;
+import upt.cafetaria.backend.model.domain.SugarLevelEnum;
 import upt.cafetaria.backend.model.web.DrinkDto;
 import upt.cafetaria.backend.service.DrinkService;
 
@@ -41,5 +42,10 @@ public class DrinkController {
         Drink deletedDrink = drinkService.getDrink(id);
         drinkService.deleteDrink(id);
         return deletedDrink;
+    }
+
+    @GetMapping("/sugarlevels")
+    public List<SugarLevelEnum> allSugarLevels() {
+        return drinkService.getSugarLevels();
     }
 }

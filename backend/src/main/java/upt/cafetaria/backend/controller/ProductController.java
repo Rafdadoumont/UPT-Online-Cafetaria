@@ -24,10 +24,10 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @PostMapping("/add")
-    Product addProduct(@Valid @RequestBody ProductDto productDto) {
-        return productService.addProduct(productDto);
-    }
+//    @PostMapping("/add")
+//    Product addProduct(@Valid @RequestBody ProductDto productDto) {
+//        return productService.addProduct(productDto);
+//    }
 
     @PutMapping("/update/{id}")
     Product updateProduct(@Valid @RequestBody ProductDto newProduct, @PathVariable Long id) {

@@ -1,18 +1,9 @@
 package upt.cafetaria.backend.model.domain;
 
-public class Soup {
-    Boolean soup;
+import jakarta.persistence.*;
 
-    public Soup(Boolean soup) {
-        this.soup = soup;
-    }
-
-    public void setSoup(Boolean soup) {
-        this.soup = soup;
-    }
-
-    public Boolean getSoup() {
-        return soup;
-    }
-
+@Entity
+@Table(name = "soup")
+public class Soup extends Product {
+    public Soup() {super();}
 }

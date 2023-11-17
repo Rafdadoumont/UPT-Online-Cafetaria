@@ -30,7 +30,7 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
                         </Label>
                         <Input
                             id="email"
-                            placeholder="name@example.com"
+                            placeholder="12345@alunos.upt.pt"
                             type="email"
                             autoCapitalize="none"
                             autoComplete="email"

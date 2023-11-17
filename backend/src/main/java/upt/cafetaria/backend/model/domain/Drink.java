@@ -1,36 +1,35 @@
 package upt.cafetaria.backend.model.domain;
 
-public class Drink {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-    Boolean sparkling;
-    Boolean Cafeine;
+@Entity
+@Table(name = "drink")
+public class Drink extends Product{
+    boolean isSparkling;
+    boolean hasCaffeine;
     SugarLevelEnum sugarLevel;
 
-    public Drink(Boolean cafeine, Boolean sparkling, SugarLevelEnum sugarLevel) {
-        this.Cafeine = cafeine;
-        this.sparkling = sparkling;
-        this.sugarLevel = sugarLevel;
-    };
+    public Drink(){};
 
-
-    public void setSparkling(Boolean sparkling) {
-        this.sparkling = sparkling;
+    public void setIsSparkling(boolean sparkling) {
+        this.isSparkling = sparkling;
     }
 
     public void setSugarLevel(SugarLevelEnum sugarLevel) {
         this.sugarLevel = sugarLevel;
     }
 
-    public void setCafeine(Boolean cafeine) {
-        Cafeine = cafeine;
+    public void setHasCaffeine(boolean hasCaffeine) {
+        this.hasCaffeine = hasCaffeine;
     }
 
-    public Boolean getCafeine() {
-        return Cafeine;
+    public boolean getHasCaffeine() {
+        return hasCaffeine;
     }
 
-    public Boolean getSparkling() {
-        return sparkling;
+    public boolean getIsSparkling() {
+        return isSparkling;
     }
 
     public SugarLevelEnum getSugarLevel() {

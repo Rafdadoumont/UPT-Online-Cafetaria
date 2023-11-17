@@ -1,11 +1,10 @@
 package upt.cafetaria.backend.model.domain;
 
-public class Dessert {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-
-    public Dessert() {
-
-    }
-
-
+@Entity
+@Table(name = "dessert")
+public class Dessert extends Product {
+    public Dessert() {}
 }

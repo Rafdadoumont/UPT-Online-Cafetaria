@@ -4,14 +4,14 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class SoupDto {
+public class DessertDto {
     private long id;
 
-    @NotEmpty(message = "soup.name.empty")
+    @NotEmpty(message = "dessert.name.empty")
     private String name;
 
-    @NotNull(message = "soup.price.null")
-    @Min(value = 0, message = "soup.price.min.0")
+    @NotNull(message = "dessert.price.null")
+    @Min(value = 0, message = "dessert.price.min.0")
     private Double price;
 
     private String description;

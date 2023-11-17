@@ -3,18 +3,22 @@ package upt.cafetaria.backend.model.web;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import upt.cafetaria.backend.model.domain.MealTypeEnum;
 
-public class SoupDto {
+public class MealDto {
     private long id;
 
-    @NotEmpty(message = "soup.name.empty")
+    @NotEmpty(message = "meal.name.empty")
     private String name;
 
-    @NotNull(message = "soup.price.null")
-    @Min(value = 0, message = "soup.price.min.0")
+    @NotNull(message = "meal.price.null")
+    @Min(value = 0, message = "meal.price.min.0")
     private Double price;
 
     private String description;
+
+    @NotNull(message = "meal.mealtype.null")
+    private MealTypeEnum mealType;
 
     public long getId() {
         return id;
@@ -46,5 +50,13 @@ public class SoupDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public MealTypeEnum getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealTypeEnum mealType) {
+        this.mealType = mealType;
     }
 }

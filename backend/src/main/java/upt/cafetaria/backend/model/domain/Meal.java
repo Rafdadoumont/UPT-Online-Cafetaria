@@ -1,19 +1,20 @@
 package upt.cafetaria.backend.model.domain;
 
-public class Meal {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "meal")
+public class Meal extends Product{
     MealTypeEnum mealType;
 
-
-
-    public Meal(MealTypeEnum mealTypeEnum){
-        this.mealType = mealTypeEnum;
-    };
+    public Meal() {}
 
     public MealTypeEnum getMealType() {
         return mealType;
     }
 
-    public void setMealType(MealTypeEnum newMealType){
-        this.mealType = newMealType;
-    };
+    public void setMealType(MealTypeEnum mealType) {
+        this.mealType = mealType;
+    }
 }

@@ -64,8 +64,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers(antMatcher("/h2/**"))
-                .requestMatchers(antMatcher("/api/auth/register"));
+                .requestMatchers(antMatcher("/h2/**"));
     }
 
     @Bean
@@ -75,7 +74,7 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthenticationFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers(antMatcher("/api/auth/register")).permitAll()
+                        .requestMatchers(antMatcher("/api/auth/**")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(antMatcher("/swagger-resources")).permitAll()

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Drink;
-import upt.cafetaria.backend.model.domain.SugarLevelEnum;
+import upt.cafetaria.backend.model.enums.SugarLevelEnum;
 import upt.cafetaria.backend.model.web.DrinkDto;
 import upt.cafetaria.backend.repository.DrinkRepository;
 
@@ -27,7 +27,7 @@ public class DrinkService {
         drink.setName(dto.getName());
         drink.setPrice(dto.getPrice());
         drink.setDescription(dto.getDescription());
-        drink.setIsSparkling(dto.isSparkling());
+        drink.setSparkling(dto.isSparkling());
         drink.setHasCaffeine(dto.isHasCaffeine());
         drink.setSugarLevel(dto.getSugarLevel());
 
@@ -40,7 +40,7 @@ public class DrinkService {
         drink.setName(dto.getName());
         drink.setPrice(dto.getPrice());
         drink.setDescription(dto.getDescription());
-        drink.setIsSparkling(dto.isSparkling());
+        drink.setSparkling(dto.isSparkling());
         drink.setHasCaffeine(dto.isHasCaffeine());
         drink.setSugarLevel(dto.getSugarLevel());
 

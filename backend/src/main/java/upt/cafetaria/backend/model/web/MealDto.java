@@ -3,7 +3,7 @@ package upt.cafetaria.backend.model.web;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import upt.cafetaria.backend.model.domain.MealTypeEnum;
+import upt.cafetaria.backend.model.enums.MealTypeEnum;
 
 public class MealDto {
     private long id;

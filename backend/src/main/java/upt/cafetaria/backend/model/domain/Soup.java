@@ -5,5 +5,4 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "soup")
 public class Soup extends Product {}

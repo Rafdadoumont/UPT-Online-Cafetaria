@@ -15,11 +15,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "reservation")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long reservationId;
 
     private LocalDate reservationDate;
 

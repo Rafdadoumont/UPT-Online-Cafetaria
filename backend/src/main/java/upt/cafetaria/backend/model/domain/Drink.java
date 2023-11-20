@@ -11,9 +11,10 @@ import upt.cafetaria.backend.model.enums.SugarLevelEnum;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name = "drink")
 public class Drink extends Product{
     boolean isSparkling;
+
     boolean hasCaffeine;
+
     SugarLevelEnum sugarLevel;
 }

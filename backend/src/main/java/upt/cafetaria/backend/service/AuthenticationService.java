@@ -1,25 +1,24 @@
 package upt.cafetaria.backend.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import io.jsonwebtoken.MalformedJwtException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Token;
 import upt.cafetaria.backend.model.enums.TokenTypeEnum;
-import upt.cafetaria.backend.model.web.AuthenticationRequest;
+import upt.cafetaria.backend.model.web.LoginRequest;
 import upt.cafetaria.backend.model.web.AuthenticationResponse;
+import upt.cafetaria.backend.model.web.RefreshTokenRequest;
 import upt.cafetaria.backend.model.web.RegisterRequest;
 import upt.cafetaria.backend.repository.TokenRepository;
 import upt.cafetaria.backend.repository.UserRepository;
 import upt.cafetaria.backend.model.domain.User;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 
@@ -46,7 +45,8 @@ public class AuthenticationService {
             User savedUser = repository.save(user);
             String jwtToken = jwtService.generateToken(user);
             String refreshToken = jwtService.generateRefreshToken(user);
-            saveUserToken(savedUser, jwtToken);
+            saveToken(savedUser, jwtToken, TokenTypeEnum.ACCESS);
+            saveToken(savedUser, refreshToken, TokenTypeEnum.REFRESH);
             return AuthenticationResponse.builder()
                     .accessToken(jwtToken)
                     .refreshToken(refreshToken)
@@ -56,72 +56,70 @@ public class AuthenticationService {
         }
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(LoginRequest request) {
         try {
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
             );
-            User user = repository.findByEmail(request.getEmail()).orElseThrow();
+            User user = repository.findByEmail(request.getEmail()).orElseThrow(() -> new ServiceException("Find By Email", "Email could not be retrieved from the request "));
             String jwtToken = jwtService.generateToken(user);
             String refreshToken = jwtService.generateRefreshToken(user);
-            revokeAllUserTokens(user);
-            saveUserToken(user, jwtToken);
+            revokeAllAccessTokens(user);
+            saveToken(user, jwtToken, TokenTypeEnum.ACCESS);
             return AuthenticationResponse.builder()
                     .accessToken(jwtToken)
                     .refreshToken(refreshToken)
                     .build();
         } catch (Exception e) {
-            throw new ServiceException("Authenticate", e.getMessage());
+            System.err.println(e.getMessage());
+            throw new ServiceException("Authenticate", "Invalid credentials");
         }
     }
 
-    private void saveUserToken(User user, String jwtToken) {
+    private void saveToken(User user, String jwtToken, TokenTypeEnum tokenType) {
         Token token = Token.builder()
                 .user(user)
                 .token(jwtToken)
-                .tokenType(TokenTypeEnum.BEARER)
+                .tokenType(tokenType)
                 .expired(false)
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
     }
 
-    private void revokeAllUserTokens(User user) {
-        List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUserId());
-        if (validUserTokens.isEmpty())
+    private void revokeAllAccessTokens(User user) {
+        List<Token> validAccessTokens = tokenRepository.findTokensByUserIdAndType(user.getUserId(), TokenTypeEnum.ACCESS);
+        if (validAccessTokens.isEmpty())
             return;
-        validUserTokens.forEach(token -> {
+        validAccessTokens.forEach(token -> {
             token.setExpired(true);
             token.setRevoked(true);
         });
-        tokenRepository.saveAll(validUserTokens);
+        tokenRepository.saveAll(validAccessTokens);
     }
 
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
+    public AuthenticationResponse refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
         try {
-            final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-            final String refreshToken;
-            final String email;
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                return;
-            }
-            refreshToken = authHeader.substring(7);
-            email = jwtService.extractEmail(refreshToken);
+            final String refreshToken = request.getRefreshToken();
+            final String email = jwtService.extractEmail(refreshToken);
             if (email != null) {
-                User user = this.repository.findByEmail(email).orElseThrow();
+                User user = this.repository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid Refresh Token"));
                 if (jwtService.isTokenValid(refreshToken, user)) {
                     String accessToken = jwtService.generateToken(user);
-                    revokeAllUserTokens(user);
-                    saveUserToken(user, accessToken);
-                    AuthenticationResponse authResponse = AuthenticationResponse.builder()
+                    revokeAllAccessTokens(user);
+                    saveToken(user, accessToken, TokenTypeEnum.ACCESS);
+                    return AuthenticationResponse.builder()
                             .accessToken(accessToken)
                             .refreshToken(refreshToken)
                             .build();
-                    new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+                } else {
+                    throw new MalformedJwtException("Invalid Refresh Token");
                 }
+            } else {
+                throw new MalformedJwtException("Invalid Refresh Token");
             }
         } catch (Exception e) {
             throw new ServiceException("Refresh Token", e.getMessage());

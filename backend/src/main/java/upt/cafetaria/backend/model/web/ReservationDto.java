@@ -10,16 +10,16 @@ import java.util.List;
 public class ReservationDto {
     private long id;
 
-    @NotNull(message = "reservationdate.null")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @FutureOrPresent(message = "reservationdate.future")
-    private LocalDate reservationDate;
-
-    @NotNull(message = "creationdate.null")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate creationDate;
-
     private List<ProductDto> products;
 
     private UserDto user;
+
+    @NotNull(message = "reservation.date.null")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @FutureOrPresent(message = "reservation.date.future")
+    private LocalDate reservationDate;
+
+    @NotNull(message = "creation.date.null")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate creationDate;
 }

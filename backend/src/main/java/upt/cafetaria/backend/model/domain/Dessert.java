@@ -6,5 +6,4 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "dessert")
 public class Dessert extends Product {}

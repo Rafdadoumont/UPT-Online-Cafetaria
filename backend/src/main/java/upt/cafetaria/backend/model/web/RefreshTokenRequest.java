@@ -1,15 +1,16 @@
 package upt.cafetaria.backend.model.web;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RefreshTokenRequest {
+    @NotBlank
+    private String refreshToken;
+
     private String email;
-    String password;
 }

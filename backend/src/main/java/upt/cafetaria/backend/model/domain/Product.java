@@ -13,7 +13,6 @@ import static jakarta.persistence.InheritanceType.JOINED;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product")
 @Inheritance(strategy=JOINED)
 public class Product {
     @Id

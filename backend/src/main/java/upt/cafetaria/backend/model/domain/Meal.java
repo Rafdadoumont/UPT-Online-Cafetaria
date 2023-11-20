@@ -11,7 +11,6 @@ import upt.cafetaria.backend.model.enums.MealTypeEnum;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "meal")
 public class Meal extends Product{
     MealTypeEnum mealType;
 }

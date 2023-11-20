@@ -17,16 +17,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "`user`")
+@Table(name = "`USER`")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+
     private String lastName;
+
     private String firstName;
+
     private String email;
+
     private String password;
+
     private Instant created;
+
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 

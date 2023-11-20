@@ -13,7 +13,6 @@ import upt.cafetaria.backend.model.enums.TokenTypeEnum;
 @AllArgsConstructor
 @Entity
 public class Token {
-
     @Id
     @GeneratedValue
     public Integer tokenId;
@@ -22,13 +21,13 @@ public class Token {
     public String token;
 
     @Enumerated(EnumType.STRING)
-    public TokenTypeEnum tokenType = TokenTypeEnum.BEARER;
+    public TokenTypeEnum tokenType;
 
     public boolean revoked;
 
     public boolean expired;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "userId")
     public User user;
 }

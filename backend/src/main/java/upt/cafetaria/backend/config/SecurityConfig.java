@@ -16,16 +16,19 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import upt.cafetaria.backend.model.domain.User;
+import upt.cafetaria.backend.model.enums.RoleEnum;
 import upt.cafetaria.backend.repository.UserRepository;
 import upt.cafetaria.backend.security.JwtAuthenticationFilter;
 import upt.cafetaria.backend.service.JwtService;
 
+import java.time.Instant;
 import java.util.List;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
@@ -40,7 +43,12 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> userRepository.findByEmail(email)
-                .orElseThrow(() -> new AccessDeniedException("Invalid token"));
+                .orElseThrow(() -> new AccessDeniedException("User with email " + email + " does not exist." ));
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -54,11 +62,6 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -91,5 +94,44 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    public void defaultUsers() {
+        User user = User.builder()
+                .firstName("user")
+                .lastName("user")
+                .email("user@mail.com")
+                .password(passwordEncoder().encode("password"))
+                .role(RoleEnum.USER)
+                .created(Instant.now())
+                .build();
+        if (userRepository.findByEmail(user.getEmail()).isEmpty()) {
+            userRepository.save(user);
+        }
+
+        User employee = User.builder()
+                .firstName("employee")
+                .lastName("employee")
+                .email("employee@mail.com")
+                .password(passwordEncoder().encode("password"))
+                .role(RoleEnum.EMPLOYEE)
+                .created(Instant.now())
+                .build();
+        if (userRepository.findByEmail(employee.getEmail()).isEmpty()) {
+            userRepository.save(employee);
+        }
+
+        User admin = User.builder()
+                .firstName("admin")
+                .lastName("admin")
+                .email("admin@mail.com")
+                .password(passwordEncoder().encode("password"))
+                .role(RoleEnum.ADMIN)
+                .created(Instant.now())
+                .build();
+        if (userRepository.findByEmail(admin.getEmail()).isEmpty()) {
+            userRepository.save(admin);
+        }
     }
 }

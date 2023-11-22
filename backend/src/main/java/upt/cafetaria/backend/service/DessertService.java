@@ -38,7 +38,7 @@ public class DessertService {
         return dessertRepository.save(dessert);
     }
 
-    public void deleteDessert(Long id) {
-        dessertRepository.delete(getDessert(id));
+    public void deleteDessert(Dessert dessert) {
+        dessertRepository.delete(dessert);
     }
 }

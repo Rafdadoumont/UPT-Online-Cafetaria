@@ -39,7 +39,7 @@ public class DessertController {
     @DeleteMapping("/delete/{id}")
     public Dessert deleteDessert(@PathVariable Long id) {
         Dessert deletedDessert = dessertService.getDessert(id);
-        dessertService.deleteDessert(id);
+        dessertService.deleteDessert(deletedDessert);
         return deletedDessert;
     }
 }

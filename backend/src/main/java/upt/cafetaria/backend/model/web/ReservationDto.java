@@ -2,11 +2,15 @@ package upt.cafetaria.backend.model.web;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Getter
+@Setter
 public class ReservationDto {
     private long id;
 

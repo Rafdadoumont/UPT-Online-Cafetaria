@@ -63,13 +63,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } catch (AccessDeniedException accessDeniedException) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write(accessDeniedException.getMessage());
         } catch (MalformedJwtException malformedJwtException) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Malformed JWT Token");
         } catch (ExpiredJwtException expiredJwtException) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Expired JWT Token");
         } catch (Exception e) {
             System.err.println("Filter Chain Exception: " + e);

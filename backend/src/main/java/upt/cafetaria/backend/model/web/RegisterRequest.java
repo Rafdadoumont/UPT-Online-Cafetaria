@@ -6,11 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import upt.cafetaria.backend.model.enums.RoleEnum;
 
-@Builder
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class RegisterRequest {
     @NotEmpty(message = "Lastname is required")
     private String lastname;

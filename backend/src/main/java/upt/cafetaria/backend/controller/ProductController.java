@@ -2,6 +2,7 @@ package upt.cafetaria.backend.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Product;
 import upt.cafetaria.backend.model.web.ProductDto;
@@ -24,11 +25,6 @@ public class ProductController {
         return productService.getProducts();
     }
 
-//    @PostMapping("/add")
-//    Product addProduct(@Valid @RequestBody ProductDto productDto) {
-//        return productService.addProduct(productDto);
-//    }
-
     @PutMapping("/update/{id}")
     Product updateProduct(@Valid @RequestBody ProductDto newProduct, @PathVariable Long id) {
         Product updatedProduct = productService.getProduct(id);
@@ -36,7 +32,9 @@ public class ProductController {
         return updatedProduct;
     }
 
+
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Product deleteProduct(@PathVariable Long id) {
         Product deletedProduct = productService.getProduct(id);
         productService.deleteProduct(id);

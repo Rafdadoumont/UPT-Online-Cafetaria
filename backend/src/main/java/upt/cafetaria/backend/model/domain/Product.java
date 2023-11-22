@@ -25,6 +25,8 @@ public class Product {
 
     private String description;
 
+    private boolean isActive;
+
     @ManyToMany(mappedBy = "products")
     private List<Reservation> reservations;
 }

@@ -3,10 +3,12 @@ package upt.cafetaria.backend.model.web;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import upt.cafetaria.backend.model.enums.SugarLevelEnum;
 
-@Data
+@Getter
+@Setter
 public class DrinkDto {
     private long id;
 

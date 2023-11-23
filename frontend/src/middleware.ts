@@ -21,6 +21,7 @@ export async function middleware(request: NextRequest) {
     if (accessTokenCookie) {
         const res: Response = await validateToken(accessTokenCookie.value);
 
+        // Valid access token
         if (res.ok) {
             const data = await res.json();
             const role = data.role;
@@ -40,12 +41,33 @@ export async function middleware(request: NextRequest) {
                     break;
                 case 'ADMIN':
                     return NextResponse.next();
-                default:
-                    return NextResponse.redirect(new URL('/login', request.url));
             }
         }
     }
+
+    // Invalid token, try generate new
+    else if (refreshTokenCookie) {
+        const res: Response = await refreshToken(refreshTokenCookie.value);
+
+        // Valid refresh token
+        if (res.ok) {
+            const data = await res.json();
+            const accessToken = data.access_token;
+            const response = NextResponse.next()
+            console.log(accessToken)
+            response.cookies.set('access-token', accessToken);
+            return response;
+        }
+    }
+
+    // No tokens found, redirect to log in
+    return NextResponse.redirect(new URL('/login', request.url));
 }
+
+// Do not apply middleware
+export const config = {
+    matcher: ['/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)']
+};
 
 async function validateToken(token: string): Promise<Response> {
     return await fetch(process.env.BACKEND_URL + '/auth/validate', {
@@ -53,5 +75,19 @@ async function validateToken(token: string): Promise<Response> {
         headers: {
             'Authorization': 'Bearer ' + token,
         },
+    });
+}
+
+async function refreshToken(refreshToken: string): Promise<Response> {
+    const requestBody = {
+        "refreshToken": refreshToken
+    };
+
+    return await fetch(process.env.BACKEND_URL + '/auth/refresh-token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
     });
 }

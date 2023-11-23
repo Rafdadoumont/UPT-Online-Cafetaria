@@ -5,6 +5,8 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { UserLoginForm } from "@/app/(auth)/login/components/user-login-form";
+import Facade from "root/public/facade.png"
+import Portucalense from "root/public/portucalense.png"
 
 export const metadata: Metadata = {
     title: "Log in",
@@ -25,15 +27,15 @@ export default function LoginPage() {
             <div className="relative hidden h-full flex-col bg-muted text-white dark:border-r lg:flex">
                 <div className="relative mt-auto h-full">
                     <Image
-                        src="/facade.png"
-                        layout="fill"
+                        src={Facade}
+                        fill
                         style={{objectFit:"cover"}}
                         alt="Authentication"
                         className="object-cover relative"
                     />
                     <div className="absolute top-10 left-10 flex gap-2 items-center">
                         <Image
-                            src="/portucalense.png"
+                            src={Portucalense}
                             alt="logo"
                             width={40}
                             height={40}

@@ -10,8 +10,4 @@ import lombok.*;
 public class RefreshTokenRequest {
     @NotEmpty(message = "refreshtokenrequest.refreshtoken.empty")
     private String refreshToken;
-
-    @NotEmpty(message = "refreshtokenrequest.email.empy")
-    @Email(message = "refreshtokenrequest.email.format")
-    private String email;
 }

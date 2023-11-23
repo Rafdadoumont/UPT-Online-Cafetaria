@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Token;
+import upt.cafetaria.backend.model.enums.RoleEnum;
 import upt.cafetaria.backend.model.enums.TokenTypeEnum;
-import upt.cafetaria.backend.model.web.LoginRequest;
-import upt.cafetaria.backend.model.web.AuthenticationResponse;
-import upt.cafetaria.backend.model.web.RefreshTokenRequest;
-import upt.cafetaria.backend.model.web.RegisterRequest;
+import upt.cafetaria.backend.model.web.*;
 import upt.cafetaria.backend.repository.TokenRepository;
 import upt.cafetaria.backend.repository.UserRepository;
 import upt.cafetaria.backend.model.domain.User;
@@ -122,7 +120,28 @@ public class AuthenticationService {
                 throw new MalformedJwtException("Invalid Refresh Token");
             }
         } catch (Exception e) {
-            throw new ServiceException("Refresh Token", e.getMessage());
+            throw new ServiceException("Invalid Refresh Token", e.getMessage());
+        }
+    }
+
+    public AuthoritiesResponse validateAccessToken(String accessToken) {
+        try {
+            String token = accessToken.substring(7);
+            final String email = jwtService.extractEmail(token);
+            if (email != null) {
+                User user = this.repository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid Access Token"));
+                if (jwtService.isTokenValid(token, user)) {
+                    return AuthoritiesResponse.builder()
+                            .role(user.getRole())
+                            .build();
+                } else {
+                    throw new MalformedJwtException("Invalid Access Token");
+                }
+            } else {
+                throw new MalformedJwtException("Invalid Access Token");
+            }
+        } catch (Exception e) {
+            throw new ServiceException("Invalid Access Token", e.getMessage());
         }
     }
 }

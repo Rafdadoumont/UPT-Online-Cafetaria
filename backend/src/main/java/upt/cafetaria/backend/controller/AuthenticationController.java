@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import upt.cafetaria.backend.model.web.LoginRequest;
-import upt.cafetaria.backend.model.web.AuthenticationResponse;
-import upt.cafetaria.backend.model.web.RefreshTokenRequest;
-import upt.cafetaria.backend.model.web.RegisterRequest;
+import upt.cafetaria.backend.model.web.*;
 import upt.cafetaria.backend.service.AuthenticationService;
 
 @RestController
@@ -31,7 +28,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh-token")
-    public AuthenticationResponse refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
-        return authenticationService.refreshToken(refreshTokenRequest);
+    public ResponseEntity<AuthenticationResponse> refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return ResponseEntity.ok(authenticationService.refreshToken(refreshTokenRequest));
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<AuthoritiesResponse> validate(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(authenticationService.validateAccessToken(token));
     }
 }

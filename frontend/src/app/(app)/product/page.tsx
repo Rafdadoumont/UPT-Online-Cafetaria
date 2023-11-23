@@ -10,7 +10,7 @@ export default function ProductPage() {
     useEffect(() => {
         async function init() {
             try {
-                const res = await fetch('http://localhost:8080/api/product/all');
+                const res: Response = await fetch('http://localhost:8080/api/product/all');
                 const data = await res.json();
                 setProducts(data);
             } catch (error) {

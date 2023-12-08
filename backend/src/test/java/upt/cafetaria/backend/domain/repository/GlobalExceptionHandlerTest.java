@@ -8,7 +8,7 @@ public class GlobalExceptionHandlerTest {
     public void globalExceptionHandler_ifReturnErrors(){
 
         //Given
-
+        Exception ex;
         //When
 
         //Then

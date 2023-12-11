@@ -1,11 +1,18 @@
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
 import {RequestCookie} from "next/dist/compiled/@edge-runtime/cookies";
+import {json} from "stream/consumers";
 
 const anonymousPrefixes: string[] = ['/login', '/register']
 const userPrefixes: string[] = ['/product']
 const employeePrefixes: string[] = []
 const adminPrefixes: string[] = []
+
+
+// Do not apply middleware
+export const config = {
+    matcher: ['/((?!api|_next/static|_next/image|_next/public|assets|favicon.ico|sw.js).*)']
+};
 
 export async function middleware(request: NextRequest) {
     const {pathname} = request.nextUrl
@@ -20,8 +27,8 @@ export async function middleware(request: NextRequest) {
     // If there is an access token
     if (accessTokenCookie) {
         const res: Response = await validateToken(accessTokenCookie.value);
-
         // Valid access token
+        console.log("Middleware: " + res)
         if (res.ok) {
             const data = await res.json();
             const role = data.role;
@@ -48,14 +55,12 @@ export async function middleware(request: NextRequest) {
     // Invalid token, try generate new
     else if (refreshTokenCookie) {
         const res: Response = await refreshToken(refreshTokenCookie.value);
-
         // Valid refresh token
         if (res.ok) {
             const data = await res.json();
             const accessToken = data.access_token;
             const response = NextResponse.next()
-            console.log(accessToken)
-            response.cookies.set('access-token', accessToken);
+            response.cookies.set({name: 'access-token', value: accessToken, path: '/', expires: 86400});
             return response;
         }
     }
@@ -63,11 +68,6 @@ export async function middleware(request: NextRequest) {
     // No tokens found, redirect to log in
     return NextResponse.redirect(new URL('/login', request.url));
 }
-
-// Do not apply middleware
-export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)']
-};
 
 async function validateToken(token: string): Promise<Response> {
     return await fetch(process.env.BACKEND_URL + '/auth/validate', {

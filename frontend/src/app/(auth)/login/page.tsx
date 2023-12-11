@@ -29,6 +29,7 @@ export default function LoginPage() {
                     <Image
                         src={Facade}
                         fill
+                        sizes="50vw"
                         style={{objectFit:"cover"}}
                         alt="Authentication"
                         className="object-cover relative"

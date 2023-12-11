@@ -107,6 +107,7 @@ public class AuthenticationService {
                 User user = this.repository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid Refresh Token"));
                 if (jwtService.isTokenValid(refreshToken, user)) {
                     String accessToken = jwtService.generateToken(user);
+                    System.out.println(System.currentTimeMillis());
                     revokeAllAccessTokens(user);
                     saveToken(user, accessToken, TokenTypeEnum.ACCESS);
                     return AuthenticationResponse.builder()

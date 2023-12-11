@@ -1,5 +1,7 @@
 package upt.cafetaria.backend.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +24,18 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @Valid @RequestBody LoginRequest request
+            @Valid @RequestBody LoginRequest request,
+            HttpServletResponse servletResponse
     ) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        AuthenticationResponse response = authenticationService.authenticate(request);
+
+        Cookie cookie = new Cookie("access-token", response.getAccessToken());
+        cookie.setMaxAge(1000000);
+        cookie.setPath("/");
+
+        servletResponse.addCookie(cookie);
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/refresh-token")

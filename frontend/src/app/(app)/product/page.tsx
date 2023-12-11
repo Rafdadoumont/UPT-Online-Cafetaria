@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Product as ProductType } from "@/types";
 import {ProductTable} from "@/app/(app)/product/components/product-table";
 import {ProductForm} from "@/app/(app)/product/components/product-form";
+import {Button} from "@/components/ui/button";
 
 export default function ProductPage() {
     const [products, setProducts] = useState<ProductType[]>([]);

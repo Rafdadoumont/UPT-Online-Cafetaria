@@ -21,7 +21,7 @@ export function ProductTable({products}: ProductTableProps) {
             <TableBody>
                 {products.map((product) => (
                     <TableRow>
-                        <TableCell className="font-medium">{product.id}</TableCell>
+                        <TableCell className="font-medium">{product.productId}</TableCell>
                         <TableCell>{product.name}</TableCell>
                         <TableCell>{product.price}</TableCell>
                         <TableCell>{product.description}</TableCell>

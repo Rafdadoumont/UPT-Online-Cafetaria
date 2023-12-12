@@ -17,5 +17,5 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
         where u.userId = :id and (t.expired = false or t.revoked = false)
         and t.tokenType = :tokenType
         """)
-    List<Token> findTokensByUserIdAndType(@Param("id") Integer userId, @Param("tokenType") TokenTypeEnum tokenType);
+    List<Token> findTokensByUserIdAndType(@Param("id") Long userId, @Param("tokenType") TokenTypeEnum tokenType);
 }

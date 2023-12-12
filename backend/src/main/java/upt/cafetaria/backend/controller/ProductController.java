@@ -32,7 +32,6 @@ public class ProductController {
         return updatedProduct;
     }
 
-
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Product deleteProduct(@PathVariable Long id) {

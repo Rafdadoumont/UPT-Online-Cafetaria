@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -8,9 +8,6 @@ import { UserLoginForm } from "@/app/(anonymous)/login/components/user-login-for
 import Facade from "root/public/facade.png"
 import Portucalense from "root/public/portucalense.png"
 
-export const metadata: Metadata = {
-    title: "Log in",
-}
 
 export default function LoginPage() {
     return (

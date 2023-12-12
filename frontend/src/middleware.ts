@@ -1,22 +1,33 @@
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
 import {RequestCookie} from "next/dist/compiled/@edge-runtime/cookies";
+import {prefixes} from "next/dist/build/output/log";
 
 const anonymousPrefixes: string[] = ['/login', '/register', '/forbidden']
 const userPrefixes: string[] = ['/home', '/reservation', '/user']
 const employeePrefixes: string[] = ['/dashboard']
-const adminPrefixes: string[] = ['/products']
+const adminPrefixes: string[] = ['/product']
 
 
 // Do not apply middleware
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|_next/public|assets|favicon.ico|sw.js).*)']
+    matcher: [
+        '/((?!api|_next/static|_next/image|images|favicon.ico|public|_next/public).*)',
+        '/((?!api|_next/static|_next/image|images|favicon.ico).*(?<!\\.png|\\.jpg|\\.jpeg|\\.gif))'
+    ],
 };
 
 export async function middleware(request: NextRequest) {
     const {pathname} = request.nextUrl
     let accessTokenCookie: RequestCookie | undefined = request.cookies.get('access-token')
     let refreshTokenCookie: RequestCookie | undefined = request.cookies.get('refresh-token')
+
+    console.log("Access Token Cookie: " + accessTokenCookie)
+
+    //Allow images
+    if (pathname.endsWith(".png")) {
+        return NextResponse.next()
+    }
 
     // Allow authentication paths
     if (anonymousPrefixes.some((prefix: string) => pathname.startsWith(prefix))) {
@@ -32,21 +43,27 @@ export async function middleware(request: NextRequest) {
             const role = data.role;
 
             // Filter private routes based on role
+            console.log("Role: " + role)
             switch (role) {
                 case 'USER':
                     if (userPrefixes.some(prefix => pathname.startsWith(prefix))) {
+                        console.log("Allowing route for: " + pathname);
                         return NextResponse.next();
                     } else {
+                        console.log("Denying route for: " + pathname);
                         return NextResponse.redirect(new URL('/forbidden', request.url));
                     }
                 case 'EMPLOYEE':
                     if (userPrefixes.some(prefix => pathname.startsWith(prefix)) ||
                         employeePrefixes.some(prefix => pathname.startsWith(prefix))) {
+                        console.log("Allowing route for: " + pathname);
                         return NextResponse.next();
                     } else {
+                        console.log("Denying route for: " + pathname);
                         return NextResponse.redirect(new URL('/forbidden', request.url));
                     }
                 case 'ADMIN':
+                    console.log("Allowing route for: " + pathname);
                     return NextResponse.next();
             }
         }

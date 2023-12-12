@@ -24,16 +24,9 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @Valid @RequestBody LoginRequest request,
-            HttpServletResponse servletResponse
+            @Valid @RequestBody LoginRequest request
     ) {
         AuthenticationResponse response = authenticationService.authenticate(request);
-
-        Cookie cookie = new Cookie("access-token", response.getAccessToken());
-        cookie.setMaxAge(1000000);
-        cookie.setPath("/");
-
-        servletResponse.addCookie(cookie);
 
         return ResponseEntity.ok(response);
     }

@@ -16,6 +16,10 @@ public class ProductService {
 
     public List<Product> getProducts() { return productRepository.findAll();}
 
+    public List<Product> getProductsById(List<Long> ids) {
+        return productRepository.findAllById(ids);
+    }
+
     public Product getProduct(long id) {
         return productRepository.findById(id).orElseThrow(() -> new ServiceException("GET", "product.not.found"));
     }

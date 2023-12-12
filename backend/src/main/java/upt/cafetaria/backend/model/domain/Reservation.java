@@ -9,6 +9,7 @@ import upt.cafetaria.backend.model.domain.Product;
 import upt.cafetaria.backend.model.domain.User;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,11 @@ public class Reservation {
 
     private LocalDate reservationDate;
 
+    private LocalTime reservationTime;
+
     private LocalDate creationDate;
+
+    private boolean fulfilled;
 
     @ManyToOne
     @JsonBackReference

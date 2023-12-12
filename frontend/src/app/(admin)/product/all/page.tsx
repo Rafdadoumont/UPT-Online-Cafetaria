@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import { Product as ProductType } from "@/types";
-import {ProductTable} from "@/app/(admin)/products/components/product-table";
-import {ProductForm} from "@/app/(admin)/products/components/product-form";
+import {ProductTable} from "@/app/(admin)/product/components/product-table";
+import {ProductForm} from "@/app/(admin)/product/components/product-form";
 import {Button} from "@/components/ui/button";
 
-export default function ProductPage() {
+export default function AllProductPage() {
     const [products, setProducts] = useState<ProductType[]>([]);
 
     useEffect(() => {
@@ -21,16 +21,18 @@ export default function ProductPage() {
                 const data = await res.json();
                 setProducts(data);
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error("Error fetching product:", error);
             }
         }
         init();
     }, []);
 
     return (
-        <div className="container relative hidden h-max p-10 flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-            <ProductTable products={products} />
-            <ProductForm />
+        <div className="container mx-auto p-10  flex flex-col items-center  min-h-screen">
+            <h1 className="text-3xl font-bold mb-6">All Product</h1>
+            <div className="max-w-2xl w-full flex justify-center">
+                <ProductTable products={products} />
+            </div>
         </div>
     );
 }

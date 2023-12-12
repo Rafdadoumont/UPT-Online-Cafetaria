@@ -68,6 +68,7 @@ public class AuthenticationService {
             revokeAllAccessTokens(user);
             saveToken(user, jwtToken, TokenTypeEnum.ACCESS);
             return AuthenticationResponse.builder()
+                    .userId(user.getUserId())
                     .accessToken(jwtToken)
                     .refreshToken(refreshToken)
                     .build();

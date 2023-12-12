@@ -10,6 +10,7 @@ import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/navigation";
+import Cookies from "js-cookie";
 
 interface UserLoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -56,7 +57,8 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
 
             if (res.status === 200) {
                 setSuccessMessage("Authenticated successfully! Redirecting...")
-                document.cookie = `access-token=${bodyJson.access_token}; path=/;`;
+                Cookies.set("access-token", bodyJson.access_token, { path: "/" });
+                Cookies.set("user-id", bodyJson.user_id, { path: "/" });
                 setTimeout(() => {
                     router.push('/home');
                 }, 500);

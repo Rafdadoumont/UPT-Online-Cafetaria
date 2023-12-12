@@ -58,8 +58,8 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
                 setSuccessMessage("Authenticated successfully! Redirecting...")
                 document.cookie = `access-token=${bodyJson.access_token}; path=/;`;
                 setTimeout(() => {
-                    router.push('/product');
-                }, 2000);
+                    router.push('/home');
+                }, 500);
             } else {
                 setErrorMessage(bodyJson.Authenticate);
             }

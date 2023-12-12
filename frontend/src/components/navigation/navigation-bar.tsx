@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, {useEffect} from "react";
 import {
     NavigationMenu,
     NavigationMenuLink,
@@ -7,11 +7,21 @@ import {
 } from "@/components/ui/navigation-menu"
 import Link from "next/link";
 import Image from "next/image";
+import {Button} from "@/components/ui/button";
+import Cookies from "js-cookie";
+import {useRouter} from "next/navigation";
 
 export function NavigationBar() {
+    const Router = useRouter();
+
+    const logout = () => {
+        Cookies.remove("access-token")
+        Router.push("/login")
+    }
+
     return (
         <NavigationMenu className="justify-between p-2 text-white">
-            <Link href="/" legacyBehavior passHref>
+            <Link href="/home" legacyBehavior passHref>
                 <div className="flex gap-2 items-center">
                     <Image
                         src="/portucalense.png"
@@ -25,25 +35,29 @@ export function NavigationBar() {
                     </div>
                 </div>
             </Link>
-            <div>
-                <Link href="/" legacyBehavior passHref className="bg-primary">
+            <div className="flex items-center">
+                <Link href="/home" legacyBehavior passHref className="bg-primary">
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                         Home
                     </NavigationMenuLink>
                 </Link>
 
-                <Link href="/product" legacyBehavior passHref>
+                <Link href="/dashboard" legacyBehavior passHref>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Product
+                        Dashboard
+                    </NavigationMenuLink>
+                </Link>
+
+                <Link href="/products" legacyBehavior passHref>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        Products
                     </NavigationMenuLink>
                 </Link>
             </div>
-            <div>
-                <Link href="/me" legacyBehavior passHref>
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        My account
-                    </NavigationMenuLink>
-                </Link>
+            <div className="flex items-center">
+                <Button onClick={logout} className="bg-red-600 text-white font-bold py-2 px-4 rounded">
+                    Log Out
+                </Button>
             </div>
         </NavigationMenu>
     )

@@ -1,12 +1,11 @@
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
 import {RequestCookie} from "next/dist/compiled/@edge-runtime/cookies";
-import {json} from "stream/consumers";
 
-const anonymousPrefixes: string[] = ['/login', '/register']
-const userPrefixes: string[] = ['/product']
-const employeePrefixes: string[] = []
-const adminPrefixes: string[] = []
+const anonymousPrefixes: string[] = ['/login', '/register', '/forbidden']
+const userPrefixes: string[] = ['/home', '/reservation', '/user']
+const employeePrefixes: string[] = ['/dashboard']
+const adminPrefixes: string[] = ['/products']
 
 
 // Do not apply middleware
@@ -28,7 +27,6 @@ export async function middleware(request: NextRequest) {
     if (accessTokenCookie) {
         const res: Response = await validateToken(accessTokenCookie.value);
         // Valid access token
-        console.log("Middleware: " + res)
         if (res.ok) {
             const data = await res.json();
             const role = data.role;
@@ -38,14 +36,16 @@ export async function middleware(request: NextRequest) {
                 case 'USER':
                     if (userPrefixes.some(prefix => pathname.startsWith(prefix))) {
                         return NextResponse.next();
+                    } else {
+                        return NextResponse.redirect(new URL('/forbidden', request.url));
                     }
-                    break;
                 case 'EMPLOYEE':
                     if (userPrefixes.some(prefix => pathname.startsWith(prefix)) ||
                         employeePrefixes.some(prefix => pathname.startsWith(prefix))) {
                         return NextResponse.next();
+                    } else {
+                        return NextResponse.redirect(new URL('/forbidden', request.url));
                     }
-                    break;
                 case 'ADMIN':
                     return NextResponse.next();
             }

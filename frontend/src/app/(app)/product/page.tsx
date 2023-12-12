@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
+import Cookies from 'js-cookie';
 import { Product as ProductType } from "@/types";
 import {ProductTable} from "@/app/(app)/product/components/product-table";
 import {ProductForm} from "@/app/(app)/product/components/product-form";
@@ -11,7 +12,12 @@ export default function ProductPage() {
     useEffect(() => {
         async function init() {
             try {
-                const res: Response = await fetch('http://localhost:8080/api/product/all');
+                const accessToken: String | undefined = Cookies.get('access-token');
+                const res = await fetch('http://localhost:8080/api/product/all', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                });
                 const data = await res.json();
                 setProducts(data);
             } catch (error) {

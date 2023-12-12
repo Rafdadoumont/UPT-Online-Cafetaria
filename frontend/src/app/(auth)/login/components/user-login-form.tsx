@@ -9,6 +9,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useRouter} from "next/navigation";
 
 interface UserLoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -22,7 +23,10 @@ const FormSchema = z.object({
 })
 
 export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false)
+    const router = useRouter();
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = React.useState<string>("");
+    const [successMessage, setSuccessMessage] = React.useState<string>("");
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -31,13 +35,41 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
         }
     })
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        setIsLoading(true)
-        console.log("Form submit")
-        console.log(data)
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 3000)
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+        setIsLoading(true);
+        console.log("Form submit");
+
+        const body = {
+            email: data.email,
+            password: data.password
+        };
+
+        try {
+            const res: Response = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+            const bodyJson = await res.json();
+
+            if (res.status === 200) {
+                setSuccessMessage("Authenticated successfully! Redirecting...")
+                document.cookie = `access-token=${bodyJson.access_token}; path=/;`;
+                setTimeout(() => {
+                    router.push('/product');
+                }, 2000);
+            } else {
+                setErrorMessage(bodyJson.Authenticate);
+            }
+
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setErrorMessage("An error occurred, please try again");
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -54,12 +86,12 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                               placeholder="Email"
-                                               type="email"
-                                               autoCapitalize="none"
-                                               autoComplete="email"
-                                               autoCorrect="off"
-                                               disabled={isLoading}
+                                                placeholder="Email"
+                                                type="email"
+                                                autoCapitalize="none"
+                                                autoComplete="email"
+                                                autoCorrect="off"
+                                                disabled={isLoading}
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -69,11 +101,12 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
                         <div className="grid gap-1">
                             <FormField
                                 control={form.control}
-                                name="email"
+                                name="password"
                                 render={({field}) => (
                                     <FormItem>
                                         <FormControl>
                                             <Input
+                                                {...field}
                                                 id="password"
                                                 placeholder="Password"
                                                 type="password"
@@ -83,6 +116,7 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
                                                 disabled={isLoading}
                                             />
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -90,6 +124,12 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
                         <Button type="submit" disabled={isLoading}>
                             Sign In with Email
                         </Button>
+                        {errorMessage && (
+                            <div className="text-red-600 flex items-center justify-center">{errorMessage}</div>
+                        )}
+                        {successMessage && (
+                            <div className="text-green-500 flex items-center justify-center">{successMessage}</div>
+                        )}
                     </div>
                 </div>
             </form>

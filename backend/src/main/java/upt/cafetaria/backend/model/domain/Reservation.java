@@ -35,6 +35,7 @@ public class Reservation {
     private User user;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(
             name = "reservation_product",
             joinColumns = @JoinColumn(name = "reservation_id"),

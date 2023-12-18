@@ -12,6 +12,7 @@ import {Calendar} from "@/components/ui/calendar";
 import {CalendarIcon} from "lucide-react";
 import Cookies from "js-cookie";
 import {Product} from "@/types";
+import {useRouter} from "next/navigation";
 
 const FormSchema = z.object({
     soup: z.string(),
@@ -22,10 +23,13 @@ const FormSchema = z.object({
 });
 
 export function ReservationForm() {
+    const router = useRouter();
     const [availableTimes, setAvailableTimes] = useState([]);
     const [availableSoups, setAvailableSoups] = useState<Product[]>([]);
     const [availableMeals, setAvailableMeals] = useState<Product[]>([]);
     const [availableDesserts, setAvailableDesserts] = useState<Product[]>([]);
+    const [errorMessage, setErrorMessage] = React.useState<string>("");
+    const [successMessage, setSuccessMessage] = React.useState<string>("");
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -99,10 +103,13 @@ export function ReservationForm() {
             if (response.ok) {
                 const reservation = await response.json();
                 console.log('Reservation created:', reservation);
-                // Handle success, e.g., show success message or redirect
+                setSuccessMessage("Reservation successfully created!")
+                setTimeout(() => {
+                    router.push('/reservation/all');
+                }, 500);
             } else {
                 console.error('Failed to create reservation:', response.status);
-                // Handle failure, show error message, etc.
+                setErrorMessage("Failed to create reservation");
             }
         } catch (error) {
             console.error('Error creating reservation:', error);
@@ -266,7 +273,12 @@ export function ReservationForm() {
                     )}
                 />
                 <Button type="submit">Make Reservation</Button>
-
+                {errorMessage && (
+                    <div className="text-red-600 flex items-center justify-center">{errorMessage}</div>
+                )}
+                {successMessage && (
+                    <div className="text-green-500 flex items-center justify-center">{successMessage}</div>
+                )}
             </form>
         </Form>
     );

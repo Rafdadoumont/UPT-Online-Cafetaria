@@ -1,8 +1,10 @@
 package upt.cafetaria.backend.domain.model;
 
+import org.springframework.security.core.token.TokenService;
 import upt.cafetaria.backend.BackendApplication;
 import upt.cafetaria.backend.domain.DessertBuilder;
 import upt.cafetaria.backend.model.domain.Dessert;
+import upt.cafetaria.backend.service.AuthenticationService;
 import upt.cafetaria.backend.service.DessertService;
 
 import org.hamcrest.core.Is;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +36,10 @@ public class DessertControllerTest {
 
     @Autowired
     private MockMvc DessertController;
+
+    @Autowired
+    private AuthenticationService authService;
+
     private Dessert newDessert1, newDessert2;
 
     @BeforeEach
@@ -42,15 +49,18 @@ public class DessertControllerTest {
     };
 
     @Test
-    public void updateDessert_IfReturn_updatedDessert() throws Exception{
+    public void updateDessert_IfReturn_updatedDessert() throws Exception {
         //Given
         List<Dessert> newDessert =  Arrays.asList(newDessert1, newDessert2);
 
         // Mocking
         given(service.getDesserts()).willReturn(newDessert);
+
         //When
         DessertController.perform(get("/api/dessert/overview")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .header("Authorization", "Bearer " + authService.getAccessTokenForTesting())
+                        .contentType(MediaType.APPLICATION_JSON))
+
                 //Then
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

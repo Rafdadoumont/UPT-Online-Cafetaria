@@ -12,14 +12,14 @@ public static DessertBuilder newDessert(){
     return new DessertBuilder();
 };
     public static DessertBuilder newDessert1(){
-        return  newDessert1()
+        return  newDessert()
                 .withName("Jelly")
                 .withPrice(2.0)
                 .withDescription("Information")
                 .withIsActive(true);
     };
     public static DessertBuilder newDessert2(){
-        return newDessert2()
+        return newDessert()
                 .withName("Jelly")
                 .withPrice(2.0)
                 .withDescription("Information")

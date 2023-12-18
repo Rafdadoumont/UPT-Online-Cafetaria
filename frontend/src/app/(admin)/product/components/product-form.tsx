@@ -11,11 +11,13 @@ import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import Cookies from "js-cookie";
 
 const FormSchema = z.object({
     type: z.enum(["soup", "meal", "dessert", "drink"], {
         required_error: "Please select a food type."
     }),
+    mealType: z.string().optional(),
     name: z.string({
         required_error: "Name is required."
     }).min(2, {
@@ -37,12 +39,46 @@ export function ProductForm() {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-
+            mealType: "meat"
         },
     })
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data)
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+        let body
+        if (data.type == "meal") {
+            body = {
+                name: data.name,
+                price: data.price,
+                description: data.description,
+                mealType: data.mealType
+            }
+        } else {
+            body = {
+                name: data.name,
+                price: data.price,
+                description: data.description,
+            }
+        }
+        try {
+            console.log(body)
+            const accessToken = Cookies.get("access-token");
+            const response: Response = await fetch('http://localhost:8080/api/' + data.type + '/add', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify(body)
+            });
+
+            console.log(response)
+            if (response.ok) {
+                const bodyJson = await response.json();
+                console.log(bodyJson)
+            }
+        } catch (error) {
+            console.error('Error adding product: ', error);
+        }
     }
 
     return (
@@ -120,6 +156,32 @@ export function ProductForm() {
                             </FormItem>
                             )}
                         />
+                        {form.watch('type') === 'meal' && (
+                            <FormField
+                                control={form.control}
+                                name="mealType"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Meal Type</FormLabel>
+                                        <FormControl>
+                                            <RadioGroup
+                                                onValueChange={field.onChange}
+                                                defaultValue={"meat"}
+                                                className="flex gap-4"
+                                            >
+                                                <RadioGroupItem value="meat" id="meat" />
+                                                <Label htmlFor="meat">Meat</Label>
+                                                <RadioGroupItem value="fish" id="fish" />
+                                                <Label htmlFor="fish">Fish</Label>
+                                                <RadioGroupItem value="vegetarian" id="vegetarian" />
+                                                <Label htmlFor="vegetarian">Vegetarian</Label>
+                                            </RadioGroup>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        )}
                         <FormField
                             control={form.control}
                             name="name"

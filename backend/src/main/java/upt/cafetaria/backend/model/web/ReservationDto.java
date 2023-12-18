@@ -24,5 +24,6 @@ public class ReservationDto {
     @FutureOrPresent(message = "reservation.date.future")
     private LocalDate reservationDate;
 
+    @DateTimeFormat(pattern = "hh/mm")
     private LocalTime reservationTime;
 }

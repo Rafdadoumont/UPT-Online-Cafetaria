@@ -27,7 +27,7 @@ public class MealService {
         meal.setName(dto.getName());
         meal.setPrice(dto.getPrice());
         meal.setDescription(dto.getDescription());
-        meal.setMealType(dto.getMealType());
+        meal.setMealType(MealTypeEnum.valueOf(dto.getMealType().toUpperCase()));
         return mealRepository.save(meal);
     }
 
@@ -37,7 +37,7 @@ public class MealService {
         meal.setName(dto.getName());
         meal.setPrice(dto.getPrice());
         meal.setDescription(dto.getDescription());
-        meal.setMealType(dto.getMealType());
+        meal.setMealType(MealTypeEnum.valueOf(dto.getMealType().toUpperCase()));
 
         return mealRepository.save(meal);
     }

@@ -73,13 +73,17 @@ export function ReservationForm() {
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         try {
             console.log(data)
-            const userId: String | undefined = Cookies.get("user-id");
-            const accessToken: String | undefined = Cookies.get('access-token');
+            const userId: string | undefined = Cookies.get("user-id");
+            const accessToken: string | undefined = Cookies.get('access-token');
+
+            // Filter out "None" selections and construct the productIds array
+            const productIds = [data.soup, data.meal, data.dessert].filter(productId => productId !== 'None');
 
             const body = JSON.stringify({
-                productIds: [data.soup, data.meal, data.dessert],
+                productIds: productIds,
                 userId: userId,
                 reservationDate: data.date,
+                reservationTime: data.time
             });
             console.log(body)
 
@@ -90,8 +94,7 @@ export function ReservationForm() {
                     'Content-Type': 'application/json',
                 },
                 body: body
-                }
-            )
+            });
 
             if (response.ok) {
                 const reservation = await response.json();
@@ -104,7 +107,8 @@ export function ReservationForm() {
         } catch (error) {
             console.error('Error creating reservation:', error);
         }
-    };
+    }
+
 
     useEffect(() => {
         fetchAvailableTimes();
@@ -129,6 +133,9 @@ export function ReservationForm() {
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
+                                    <SelectItem value="None">
+                                        None
+                                    </SelectItem>
                                     {availableSoups.map((option, index) => (
                                         <SelectItem key={index} value={option.productId.toString()}>
                                             {option.name}
@@ -153,6 +160,9 @@ export function ReservationForm() {
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
+                                    <SelectItem value="None">
+                                        None
+                                    </SelectItem>
                                     {availableMeals.map((option, index) => (
                                         <SelectItem key={index} value={option.productId.toString()}>
                                             {option.name}
@@ -177,7 +187,10 @@ export function ReservationForm() {
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                {availableSoups.map((option, index) => (
+                                <SelectItem value="None">
+                                    None
+                                </SelectItem>
+                                {availableDesserts.map((option, index) => (
                                     <SelectItem key={index} value={option.productId.toString()}>
                                         {option.name}
                                     </SelectItem>

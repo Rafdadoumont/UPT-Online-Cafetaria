@@ -44,6 +44,7 @@ public class ReservationService {
 
         try {
             reservation.setReservationDate(dto.getReservationDate());
+            reservation.setReservationTime(dto.getReservationTime());
             reservation.setCreationDate(LocalDate.now());
             reservation.setUser(userService.getUser(dto.getUserId()));
             reservation.setProducts(productService.getProductsById(dto.getProductIds()));

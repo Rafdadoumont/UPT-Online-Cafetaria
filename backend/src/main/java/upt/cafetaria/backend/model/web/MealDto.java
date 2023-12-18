@@ -22,5 +22,5 @@ public class MealDto {
     private String description;
 
     @NotNull(message = "meal.mealtype.null")
-    private MealTypeEnum mealType;
+    private String mealType;
 }

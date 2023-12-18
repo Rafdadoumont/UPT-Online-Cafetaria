@@ -5,7 +5,7 @@ import {Product as ProductType, Reservation} from "@/types";
 import {ProductTable} from "@/app/(admin)/product/components/product-table";
 import {ProductForm} from "@/app/(admin)/product/components/product-form";
 import {Button} from "@/components/ui/button";
-import {ReservationTable} from "@/app/(user)/reservation/new/components/reservation-table";
+import {ReservationTable} from "@/app/(user)/reservation/all/components/reservation-table";
 
 export default function ReservationPage() {
     const [unfulfilledReservations, setUnfulfilledReservations] = useState([]);

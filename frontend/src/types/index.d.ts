@@ -5,7 +5,6 @@ export interface User {
     email: string
 }
 
-
 export interface Product {
     productId: number,
     name: string,

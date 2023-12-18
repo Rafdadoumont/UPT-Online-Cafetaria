@@ -24,7 +24,7 @@ export function ReservationTable({reservations}: reservationTableProps) {
                         <TableCell>{reservation.reservationTime}</TableCell>
                         <TableCell>
                             {reservation.product && reservation.product.map((product, index) => (
-                                <span key={product.id}>
+                                <span key={product.productId}>
                                     {product.name}
                                     {index !== reservation.product.length - 1 && ', '}
                                 </span>

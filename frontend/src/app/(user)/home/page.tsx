@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ReservationTable } from "@/app/(user)/reservation/new/components/reservation-table";
+import { ReservationTable } from "@/app/(user)/reservation/all/components/reservation-table";
 import Cookies from "js-cookie";
 
 export default function HomePage() {

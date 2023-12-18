@@ -12,6 +12,7 @@ import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import Cookies from "js-cookie";
+import {useRouter} from "next/navigation";
 
 const FormSchema = z.object({
     type: z.enum(["soup", "meal", "dessert", "drink"], {
@@ -36,6 +37,10 @@ const FormSchema = z.object({
 })
 
 export function ProductForm() {
+    const router = useRouter();
+    const [errorMessage, setErrorMessage] = React.useState<string>("");
+    const [successMessage, setSuccessMessage] = React.useState<string>("");
+
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -75,9 +80,14 @@ export function ProductForm() {
             if (response.ok) {
                 const bodyJson = await response.json();
                 console.log(bodyJson)
+                setSuccessMessage("Product successfully created!")
+                setTimeout(() => {
+                    router.push('/product/all');
+                }, 500);
             }
         } catch (error) {
             console.error('Error adding product: ', error);
+            setErrorMessage("Failed to create product");
         }
     }
 
@@ -223,8 +233,14 @@ export function ProductForm() {
                         />
                     </CardContent>
                     <CardFooter>
-                        <Button className="w-full" type="submit">Continue</Button>
+                        <Button className="w-full" type="submit">Add product</Button>
                     </CardFooter>
+                    {errorMessage && (
+                        <div className="text-red-600 flex items-center justify-center">{errorMessage}</div>
+                    )}
+                    {successMessage && (
+                        <div className="text-green-500 flex items-center justify-center">{successMessage}</div>
+                    )}
                 </Card>
             </form>
         </Form>

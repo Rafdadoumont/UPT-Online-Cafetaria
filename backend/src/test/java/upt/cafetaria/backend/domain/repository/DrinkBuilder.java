@@ -1,4 +1,4 @@
 package upt.cafetaria.backend.domain.repository;
 
-public class MealTest {
+public class DrinkBuilder {
 }

@@ -17,4 +17,6 @@ public class Drink extends Product{
     boolean hasCaffeine;
 
     SugarLevelEnum sugarLevel;
+
+
 }

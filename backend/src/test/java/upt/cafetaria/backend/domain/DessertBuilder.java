@@ -1,6 +1,7 @@
 package upt.cafetaria.backend.domain;
 
 import upt.cafetaria.backend.model.domain.Dessert;
+import upt.cafetaria.backend.model.web.DessertDto;
 
 public class DessertBuilder {
     private long productId;
@@ -26,6 +27,21 @@ public static DessertBuilder newDessert(){
                 .withIsActive(true);
     };
 
+    public static DessertBuilder newDessert3(){
+        return newDessert()
+                .withName("Jelly")
+                .withPrice(2.0)
+                .withDescription("Information");
+
+    };
+    public static DessertBuilder newDessert4(){
+        return newDessert()
+                .withName("Jelly")
+                .withPrice(2.0)
+                .withDescription("Information");
+
+    };
+
     public DessertBuilder withName(String name){
         this.name = name;
         return this;
@@ -49,6 +65,14 @@ public static DessertBuilder newDessert(){
         dessert.setPrice(price);
         dessert.setDescription(description);
         dessert.setActive(isActive);
+        return dessert;
+    }
+
+    public DessertDto build2(){
+        DessertDto dessert = new DessertDto();
+        dessert.setName(name);
+        dessert.setPrice(price);
+        dessert.setDescription(description);
         return dessert;
     }
 }

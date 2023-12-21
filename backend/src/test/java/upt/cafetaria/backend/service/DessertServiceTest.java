@@ -1,4 +1,4 @@
-package upt.cafetaria.backend.domain.model;
+package upt.cafetaria.backend.service;
 
 import org.junit.jupiter.api.Test;
 import upt.cafetaria.backend.model.web.DessertDto;

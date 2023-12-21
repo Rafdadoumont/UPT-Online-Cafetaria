@@ -1,11 +1,12 @@
-package upt.cafetaria.backend.domain.model;
+package upt.cafetaria.backend.controller;
 
 import org.springframework.security.core.token.TokenService;
 import upt.cafetaria.backend.BackendApplication;
-import upt.cafetaria.backend.domain.DessertBuilder;
-import upt.cafetaria.backend.model.domain.Dessert;
+import upt.cafetaria.backend.domain.DrinkBuilder;
+import upt.cafetaria.backend.domain.DrinkBuilder;
+import upt.cafetaria.backend.model.domain.Drink;
 import upt.cafetaria.backend.service.AuthenticationService;
-import upt.cafetaria.backend.service.DessertService;
+import upt.cafetaria.backend.service.DrinkService;
 
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import upt.cafetaria.backend.service.DrinkService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,44 +31,60 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = BackendApplication.class)
 @AutoConfigureMockMvc
-public class DessertControllerTest {
+public class DrinkControllerTest {
 
     @MockBean
-    private DessertService service;
+    private DrinkService service;
 
     @Autowired
-    private MockMvc DessertController;
+    private MockMvc DrinkController;
 
     @Autowired
     private AuthenticationService authService;
-
-    private Dessert newDessert1, newDessert2;
+    private Drink newDrink1, newDrink2;
 
     @BeforeEach
     public void setUp(){
-        newDessert1 = DessertBuilder.newDessert1().build();
-        newDessert2 = DessertBuilder.newDessert2().build();
+        newDrink1 = DrinkBuilder.newDrink1().build();
+        newDrink2 = DrinkBuilder.newDrink2().build();
     };
 
     @Test
-    public void updateDessert_IfReturn_updatedDessert() throws Exception {
+    public void allDrinks_IfReturn_allDrink() throws Exception {
         //Given
-        List<Dessert> newDessert =  Arrays.asList(newDessert1, newDessert2);
+        List<Drink> newDrink =  Arrays.asList(newDrink1, newDrink2);
 
         // Mocking
-        given(service.getDesserts()).willReturn(newDessert);
+        given(service.getDrinks()).willReturn(newDrink);
 
         //When
-        DessertController.perform(get("/api/dessert/overview")
+        DrinkController.perform(get("/api/drink/all")
                         .header("Authorization", "Bearer " + authService.getAccessTokenForTesting())
                         .contentType(MediaType.APPLICATION_JSON))
-
                 //Then
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].name", Is.is(newDessert1.getName())))
-                .andExpect(jsonPath("$[0].price", Is.is(newDessert1.getPrice())))
-                .andExpect(jsonPath("$[0].description", Is.is(newDessert1.getDescription())));
-//                .andExpect(jsonPath("$[0].isActive", Is.is(newDessert1.getActive)));
+                .andExpect(jsonPath("$[0].name", Is.is(newDrink1.getName())))
+                .andExpect(jsonPath("$[0].price", Is.is(newDrink1.getPrice())))
+                .andExpect(jsonPath("$[0].description", Is.is(newDrink1.getDescription())));
+
+    };
+    @Test
+    public void addDrink_IfAddDrink() throws Exception{
+
+    };
+
+    @Test
+    public void updateDrink_IfReturnUpdatedDrink() throws Exception{
+
+    };
+    @Test
+    public void deleteDrink_IfDeletedDrink() throws Exception{
+
+    };
+
+    @Test
+    public void allSugarLevels_IfReturnSugarLevel() throws Exception{
+
     };
 }

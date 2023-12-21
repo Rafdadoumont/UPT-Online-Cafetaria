@@ -37,6 +37,8 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
     })
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
+        setSuccessMessage("")
+        setErrorMessage("")
         setIsLoading(true);
         console.log("Form submit");
 

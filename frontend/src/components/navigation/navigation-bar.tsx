@@ -90,7 +90,7 @@ export function NavigationBar() {
                 </NavigationMenu>
             </div>
             <div className="flex items-center">
-                <Button onClick={logout} className="bg-red-600 text-white font-bold py-2 px-4 rounded">
+                <Button onClick={logout} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">
                     Log Out
                 </Button>
             </div>

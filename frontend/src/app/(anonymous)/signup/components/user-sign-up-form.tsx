@@ -52,6 +52,8 @@ export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
     })
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
+        setSuccessMessage("")
+        setErrorMessage("")
         setIsLoading(true);
         console.log("Form submit");
 
@@ -81,7 +83,7 @@ export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
                     router.push('/login');
                 }, 500);
             } else {
-                setErrorMessage(bodyJson.Authenticate);
+                setErrorMessage(bodyJson.Register);
             }
 
         } catch (error) {

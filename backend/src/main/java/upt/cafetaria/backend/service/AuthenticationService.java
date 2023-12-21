@@ -146,4 +146,9 @@ public class AuthenticationService {
             throw new ServiceException("Invalid Access Token", e.getMessage());
         }
     }
+
+    public String getAccessTokenForTesting() {
+        User user = this.repository.findAll().get(0);
+        return jwtService.generateToken(user);
+    }
 }

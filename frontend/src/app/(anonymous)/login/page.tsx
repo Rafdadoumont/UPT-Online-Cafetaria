@@ -1,26 +1,28 @@
 "use client"
 import Image from "next/image"
-import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import {Button} from "@/components/ui/button"
 import { UserLoginForm } from "@/app/(anonymous)/login/components/user-login-form";
 import Facade from "root/public/facade.png"
 import Portucalense from "root/public/portucalense.png"
+import {useRouter} from "next/navigation";
 
 
 export default function LoginPage() {
+    const router = useRouter();
+
     return (
         <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-            <Link
-                href="/signup"
+            <Button
+                onClick={() => router.push('/signup')}
+                variant={"ghost"}
                 className={cn(
-                    buttonVariants({ variant: "ghost" }),
                     "absolute right-4 top-4 md:right-8 md:top-8"
                 )}
             >
                 Sign up
-            </Link>
+            </Button>
             <div className="relative hidden h-full flex-col bg-muted text-white dark:border-r lg:flex">
                 <div className="relative mt-auto h-full">
                     <Image

@@ -1,9 +1,8 @@
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
 import {RequestCookie} from "next/dist/compiled/@edge-runtime/cookies";
-import {prefixes} from "next/dist/build/output/log";
 
-const anonymousPrefixes: string[] = ['/login', '/register', '/forbidden']
+const anonymousPrefixes: string[] = ['/login', '/signup', '/forbidden']
 const userPrefixes: string[] = ['/home', '/reservation', '/user']
 const employeePrefixes: string[] = ['/dashboard']
 const adminPrefixes: string[] = ['/product']

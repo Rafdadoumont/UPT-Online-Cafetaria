@@ -1,6 +1,7 @@
 package upt.cafetaria.backend.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,7 +50,6 @@ public class Reservation {
      *Creating many-to-many relation with products.
      */
     @ManyToMany
-    @JsonBackReference
     @JoinTable(
             name = "reservation_product",
             joinColumns = @JoinColumn(name = "reservation_id"),

@@ -27,21 +27,19 @@ public class ReservationService {
     }
 
     public List<Reservation> getUnfulfilledReservationsByUserId(long id) {
-        return reservationRepository.findByUserUserIdAndFulfilled(id, false);
+        return reservationRepository.findByUserUserIdAndFulfilledOrderByReservationDateDescReservationTimeDesc(id, false);
     }
 
     public List<Reservation> getFulfilledReservationsByUserId(long id) {
-        return reservationRepository.findByUserUserIdAndFulfilled(id, true);
+        return reservationRepository.findByUserUserIdAndFulfilledOrderByReservationDateDescReservationTimeDesc(id, true);
     }
 
     public Reservation getReservation(long id) {
         return reservationRepository.findById(id).orElseThrow(() -> new ServiceException("GET", "reservation.not.found"));
     }
 
-
     public Reservation addReservation(ReservationDto dto)  {
         Reservation reservation = new Reservation();
-
         try {
             reservation.setReservationDate(dto.getReservationDate());
             reservation.setReservationTime(dto.getReservationTime());

@@ -44,15 +44,16 @@ export default function ReservationPage() {
 
     return (
         <div className="container mx-auto px-4 py-8 lg:py-16">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="flex flex-col">
                 <div>
-                    <h2 className="text-2xl font-semibold mb-4">Active Reservations</h2>
+                    <h1 className="text-3xl font-bold mb-1">My reservations</h1>
+                    <p className="text-sm text-muted-foreground mb-6">An overview of active reservations and history.</p>
                     <ReservationTable reservations={unfulfilledReservations} />
                 </div>
-                <div>
-                    <h2 className="text-2xl font-semibold mb-4">Fulfilled Reservations</h2>
-                    <ReservationTable reservations={fulfilledReservations} />
-                </div>
+                {/*<div>*/}
+                {/*    <h2 className="text-2xl font-semibold mb-4">Fulfilled Reservations</h2>*/}
+                {/*    <ReservationTable reservations={fulfilledReservations} />*/}
+                {/*</div>*/}
             </div>
         </div>
     );

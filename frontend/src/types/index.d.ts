@@ -19,7 +19,7 @@ export interface Meal extends Product {
 export interface Reservation {
     reservationId: number,
     user: User,
-    product: Product[],
+    products: Product[],
     reservationDate: string,
     reservationTime: string
 }

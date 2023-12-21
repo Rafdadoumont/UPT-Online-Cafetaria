@@ -2,6 +2,7 @@ import React from "react";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Reservation} from "@/types";
 import {Label} from "@/components/ui/label";
+import {format} from "date-fns";
 
 interface reservationTableProps {
     reservations: Reservation[]
@@ -9,7 +10,7 @@ interface reservationTableProps {
 
 export function ReservationTable({reservations}: reservationTableProps) {
     return (
-        <Table className="border border-gray-300">
+        <Table className="">
             <TableHeader>
                 <TableRow>
                     <TableHead>Date</TableHead>
@@ -20,13 +21,13 @@ export function ReservationTable({reservations}: reservationTableProps) {
             <TableBody>
                 {reservations && reservations.map((reservation) => (
                     <TableRow>
-                        <TableCell>{reservation.reservationDate}</TableCell>
+                        <TableCell>{format(new Date(reservation.reservationDate), 'MMMM dd, yyyy')}</TableCell>
                         <TableCell>{reservation.reservationTime}</TableCell>
-                        <TableCell>
-                            {reservation.product && reservation.product.map((product, index) => (
+                        <TableCell colSpan={3}>
+                            {reservation.products && reservation.products.map((product, index) => (
                                 <span key={product.productId}>
                                     {product.name}
-                                    {index !== reservation.product.length - 1 && ', '}
+                                    {index !== reservation.products.length - 1 && ', '}
                                 </span>
                             ))}
                         </TableCell>

@@ -11,7 +11,7 @@ import { format } from "date-fns"
 import {Calendar} from "@/components/ui/calendar";
 import {CalendarIcon} from "lucide-react";
 import Cookies from "js-cookie";
-import {Product} from "@/types";
+import {Meal, Product} from "@/types";
 import {useRouter} from "next/navigation";
 
 const FormSchema = z.object({
@@ -26,7 +26,7 @@ export function ReservationForm() {
     const router = useRouter();
     const [availableTimes, setAvailableTimes] = useState([]);
     const [availableSoups, setAvailableSoups] = useState<Product[]>([]);
-    const [availableMeals, setAvailableMeals] = useState<Product[]>([]);
+    const [availableMeals, setAvailableMeals] = useState<Meal[]>([]);
     const [availableDesserts, setAvailableDesserts] = useState<Product[]>([]);
     const [errorMessage, setErrorMessage] = React.useState<string>("");
     const [successMessage, setSuccessMessage] = React.useState<string>("");
@@ -55,7 +55,10 @@ export function ReservationForm() {
         }
     }
 
-    async function fetchAvailableOptions(type: String, setter: Dispatch<SetStateAction<Product[]>>) {
+    async function fetchAvailableOptions<T>(
+        type: string,
+        setter: Dispatch<SetStateAction<T[]>>
+    ) {
         const accessToken = Cookies.get("access-token");
 
         try {
@@ -66,7 +69,7 @@ export function ReservationForm() {
             });
             if (response.ok) {
                 const options = await response.json();
-                setter(options);
+                setter(options as T[]);
             }
         } catch (error) {
             console.error(`Error fetching ${type} options:`, error);
@@ -126,7 +129,7 @@ export function ReservationForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6" noValidate>
                 <FormField
                     control={form.control}
                     name="soup"
@@ -171,7 +174,7 @@ export function ReservationForm() {
                                         None
                                     </SelectItem>
                                     {availableMeals.map((option, index) => (
-                                        <SelectItem key={index} value={option.productId.toString()}>
+                                        <SelectItem key={index} value={option.productId.toString()} mealType={option.mealType}>
                                             {option.name}
                                         </SelectItem>
                                     ))}
@@ -238,7 +241,9 @@ export function ReservationForm() {
                                     selected={field.value}
                                     onSelect={field.onChange}
                                     disabled={(date) =>
-                                        date < new Date(new Date().setHours(0, 0, 0, 0))
+                                        // Check if the date is today and the time is after 11 am
+                                        date < new Date(new Date().setHours(0, 0, 0, 0)) || // Disable past dates
+                                        (date.toDateString() === new Date().toDateString() && new Date().getHours() >= 11)
                                     }
                                     initialFocus
                                 />

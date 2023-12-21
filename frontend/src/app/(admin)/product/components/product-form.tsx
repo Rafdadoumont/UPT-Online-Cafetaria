@@ -1,6 +1,5 @@
 "use client"
-import React, {useState} from "react";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import React from "react";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
@@ -93,155 +92,143 @@ export function ProductForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Product</CardTitle>
-                        <CardDescription>
-                            Add a new product to available options.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-6">
-                        <FormField
-                            control={form.control}
-                            name="type"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <RadioGroup
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                            className="grid grid-cols-4 gap-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6" noValidate>
+                <FormField
+                    control={form.control}
+                    name="type"
+                    render={({field}) => (
+                        <FormItem>
+                            <FormControl>
+                                <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="grid grid-cols-4 gap-4">
 
-                                            {/*SOUP*/}
-                                            <FormItem>
-                                                <RadioGroupItem value="soup" id="soup" className="peer sr-only"/>
-                                                <Label
-                                                    htmlFor="soup"
-                                                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                                >
-                                                    <Image src="/soup.png" alt="soup icon" height={30} width={30}/>
-                                                    Soup
-                                                </Label>
-                                            </FormItem>
+                                    {/*SOUP*/}
+                                    <FormItem>
+                                        <RadioGroupItem value="soup" id="soup" className="peer sr-only"/>
+                                        <Label
+                                            htmlFor="soup"
+                                            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                                        >
+                                            <Image src="/soup.png" alt="soup icon" height={30} width={30}/>
+                                            Soup
+                                        </Label>
+                                    </FormItem>
 
-                                            {/*MEAL*/}
-                                            <FormItem>
-                                                <RadioGroupItem value="meal" id="meal" className="peer sr-only" />
-                                                <Label
-                                                    htmlFor="meal"
-                                                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                                >
-                                                    <Image src="/meal.png" alt="meal icon" height={30} width={30}/>
-                                                    Meal
-                                                </Label>
-                                            </FormItem>
+                                    {/*MEAL*/}
+                                    <FormItem>
+                                        <RadioGroupItem value="meal" id="meal" className="peer sr-only" />
+                                        <Label
+                                            htmlFor="meal"
+                                            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                                        >
+                                            <Image src="/meal.png" alt="meal icon" height={30} width={30}/>
+                                            Meal
+                                        </Label>
+                                    </FormItem>
 
-                                            {/*DESSERT*/}
-                                            <FormItem>
-                                                <RadioGroupItem value="dessert"  id="dessert" className="peer sr-only" />
-                                                <Label
-                                                    htmlFor="dessert"
-                                                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                                >
-                                                    <Image src="/dessert.png" alt="meal icon" height={30} width={30}/>
-                                                    Dessert
-                                                </Label>
-                                            </FormItem>
+                                    {/*DESSERT*/}
+                                    <FormItem>
+                                        <RadioGroupItem value="dessert"  id="dessert" className="peer sr-only" />
+                                        <Label
+                                            htmlFor="dessert"
+                                            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                                        >
+                                            <Image src="/dessert.png" alt="meal icon" height={30} width={30}/>
+                                            Dessert
+                                        </Label>
+                                    </FormItem>
 
-                                            {/*DRINK*/}
-                                            <FormItem>
-                                                <RadioGroupItem value="drink" id="drink"  className="peer sr-only" />
-                                                <Label
-                                                    htmlFor="drink"
-                                                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                                >
-                                                    <Image src="/drink.png" alt="drink icon" height={30} width={30}/>
-                                                    Drink
-                                                </Label>
-                                            </FormItem>
-                                        </RadioGroup>
-                                    </FormControl>
+                                    {/*DRINK*/}
+                                    <FormItem>
+                                        <RadioGroupItem value="drink" id="drink"  className="peer sr-only" />
+                                        <Label
+                                            htmlFor="drink"
+                                            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                                        >
+                                            <Image src="/drink.png" alt="drink icon" height={30} width={30}/>
+                                            Drink
+                                        </Label>
+                                    </FormItem>
+                                </RadioGroup>
+                            </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+                {form.watch('type') === 'meal' && (
+                    <FormField
+                        control={form.control}
+                        name="mealType"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Meal Type</FormLabel>
+                                <FormControl>
+                                    <RadioGroup
+                                        onValueChange={field.onChange}
+                                        defaultValue={"meat"}
+                                        className="flex gap-4"
+                                    >
+                                        <RadioGroupItem value="meat" id="meat" />
+                                        <Label htmlFor="meat">Meat</Label>
+                                        <RadioGroupItem value="fish" id="fish" />
+                                        <Label htmlFor="fish">Fish</Label>
+                                        <RadioGroupItem value="vegetarian" id="vegetarian" />
+                                        <Label htmlFor="vegetarian">Vegetarian</Label>
+                                    </RadioGroup>
+                                </FormControl>
                                 <FormMessage />
                             </FormItem>
-                            )}
-                        />
-                        {form.watch('type') === 'meal' && (
-                            <FormField
-                                control={form.control}
-                                name="mealType"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Meal Type</FormLabel>
-                                        <FormControl>
-                                            <RadioGroup
-                                                onValueChange={field.onChange}
-                                                defaultValue={"meat"}
-                                                className="flex gap-4"
-                                            >
-                                                <RadioGroupItem value="meat" id="meat" />
-                                                <Label htmlFor="meat">Meat</Label>
-                                                <RadioGroupItem value="fish" id="fish" />
-                                                <Label htmlFor="fish">Fish</Label>
-                                                <RadioGroupItem value="vegetarian" id="vegetarian" />
-                                                <Label htmlFor="vegetarian">Vegetarian</Label>
-                                            </RadioGroup>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
                         )}
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="price"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Price</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Description</FormLabel>
-                                    <FormControl>
-                                        <Textarea {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </CardContent>
-                    <CardFooter>
-                        <Button className="w-full" type="submit">Add product</Button>
-                    </CardFooter>
-                    {errorMessage && (
-                        <div className="text-red-600 flex items-center justify-center">{errorMessage}</div>
+                    />
+                )}
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
                     )}
-                    {successMessage && (
-                        <div className="text-green-500 flex items-center justify-center">{successMessage}</div>
+                />
+                <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Price</FormLabel>
+                            <FormControl>
+                                <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
                     )}
-                </Card>
+                />
+                <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Description</FormLabel>
+                            <FormControl>
+                                <Textarea {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button className="w-full" type="submit">Add product</Button>
+                {errorMessage && (
+                    <div className="text-red-600 flex items-center justify-center">{errorMessage}</div>
+                )}
+                {successMessage && (
+                    <div className="text-green-500 flex items-center justify-center">{successMessage}</div>
+                )}
             </form>
         </Form>
     )

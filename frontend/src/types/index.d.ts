@@ -6,10 +6,14 @@ export interface User {
 }
 
 export interface Product {
-    productId: number,
-    name: string,
-    price: number,
-    description: string
+    productId: number;
+    name: string;
+    price: number;
+    description: string;
+}
+
+export interface Meal extends Product {
+    mealType: string;
 }
 
 export interface Reservation {

@@ -12,11 +12,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ *Defining this class as an entity to map it to database.
+ *
+ */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Reservation {
+
+    /**
+     *Create new field "id" that is used as primary key and automatically assign unique value.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long reservationId;
@@ -29,11 +37,17 @@ public class Reservation {
 
     private boolean fulfilled;
 
+    /**
+     * Creating many-to-one relation to user.
+     */
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 
+    /**
+     *Creating many-to-many relation with products.
+     */
     @ManyToMany
     @JsonBackReference
     @JoinTable(

@@ -10,6 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Defining class ReservationDto that connect backend and frontend.
+ * Automatically creating getters and setters.
+ */
 @Getter
 @Setter
 public class ReservationDto {

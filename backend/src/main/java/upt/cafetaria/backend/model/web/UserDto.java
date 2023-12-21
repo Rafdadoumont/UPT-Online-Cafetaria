@@ -4,6 +4,10 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Defining class UserDto that connect backend and frontend.
+ * Automatically creating getters and setters.
+ */
 @Getter
 @Setter
 public class UserDto {

@@ -3,6 +3,10 @@ package upt.cafetaria.backend.model.web;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+/**
+ * Defining class LoginRequest that connect backend and frontend.
+ * Automatically creating getters and setters.
+ */
 @Getter
 @Setter
 public class LoginRequest {

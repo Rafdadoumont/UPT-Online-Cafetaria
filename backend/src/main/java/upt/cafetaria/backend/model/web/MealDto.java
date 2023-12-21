@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import upt.cafetaria.backend.model.enums.MealTypeEnum;
 
+/**
+ * Defining class MealDto that connect backend and frontend.
+ * Automatically creating getters and setters.
+ */
 @Getter
 @Setter
 public class MealDto {

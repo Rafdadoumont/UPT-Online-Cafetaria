@@ -11,6 +11,15 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Defining this class as an entity to map it to database.
+ * Automatically builds getters, setters, toString, hashCode, equals.
+ * Automatically generate parameterless constructor.
+ * Automatically generate constructor with no arguments.
+ * Automatically generate constructor with all arguments.
+ * Automatically generates builder pattern.
+ * Specifies name of the table in the database.
+ */
 @Entity
 @Getter
 @Setter
@@ -19,6 +28,9 @@ import java.util.List;
 @Builder
 @Table(name = "`USER`")
 public class User implements UserDetails {
+    /**
+     *Create new field "userId" that is used as primary key and automatically assign unique value.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -33,9 +45,16 @@ public class User implements UserDetails {
 
     private Instant created;
 
+    /**
+     * Create field "role" and specify that RoleEnum is stored as string.
+     */
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
+    /**
+     * Implements method to retrieve roles of users.
+     * @return list of roles
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.toString()));

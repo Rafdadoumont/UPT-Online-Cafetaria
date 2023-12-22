@@ -102,7 +102,7 @@ export function ProductForm() {
                                 <RadioGroup
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
-                                    className="grid grid-cols-4 gap-4">
+                                    className="grid grid-cols-3 gap-4">
 
                                     {/*SOUP*/}
                                     <FormItem>
@@ -137,18 +137,6 @@ export function ProductForm() {
                                         >
                                             <Image src="/dessert.png" alt="meal icon" height={30} width={30}/>
                                             Dessert
-                                        </Label>
-                                    </FormItem>
-
-                                    {/*DRINK*/}
-                                    <FormItem>
-                                        <RadioGroupItem value="drink" id="drink"  className="peer sr-only" />
-                                        <Label
-                                            htmlFor="drink"
-                                            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                        >
-                                            <Image src="/drink.png" alt="drink icon" height={30} width={30}/>
-                                            Drink
                                         </Label>
                                     </FormItem>
                                 </RadioGroup>

@@ -6,10 +6,9 @@ interface ProductTableProps {
     products: Product[]
 }
 
-export function ProductTable({products}: ProductTableProps) {
+export function SoupTable({products}: ProductTableProps) {
     return (
         <Table>
-            <TableCaption>An overview of available products</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead>Id</TableHead>

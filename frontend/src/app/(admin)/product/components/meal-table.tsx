@@ -48,10 +48,10 @@ export function MealTable() {
         }
     }
 
-    async function deactivate(soupId: number) {
+    async function deactivate(mealId: number) {
         try {
             const accessToken = Cookies.get("access-token");
-            const response: Response = await fetch('http://localhost:8080/api/product/deactivate/' + soupId, {
+            const response: Response = await fetch('http://localhost:8080/api/product/deactivate/' + mealId, {
                 method: "PUT",
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
@@ -61,6 +61,22 @@ export function MealTable() {
             setRerender(!rerender)
         } catch (error) {
 
+        }
+    }
+
+    async function remove(mealId: number) {
+        try {
+            const accessToken = Cookies.get("access-token");
+            const response: Response = await fetch('http://localhost:8080/api/product/delete/' + mealId, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            console.log(response)
+            setRerender(!rerender)
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -74,6 +90,7 @@ export function MealTable() {
                     <TableHead>Meal type</TableHead>
                     <TableHead>Description</TableHead>
                     <TableHead>In menu</TableHead>
+                    <TableHead></TableHead>
                     <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
@@ -91,6 +108,11 @@ export function MealTable() {
                                 <Button onClick={() => deactivate(meal.productId)}>Deactivate</Button> :
                                 <Button onClick={() => activate(meal.productId)}>Activate</Button>
                             }
+                        </TableCell>
+                        <TableCell>
+                            <Button onClick={() => remove(meal.productId)} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                Delete
+                            </Button>
                         </TableCell>
                     </TableRow>
                 ))}

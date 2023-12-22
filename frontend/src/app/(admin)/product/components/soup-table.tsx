@@ -65,6 +65,22 @@ export function SoupTable() {
         }
     }
 
+    async function remove(soupId: number) {
+        try {
+            const accessToken = Cookies.get("access-token");
+            const response: Response = await fetch('http://localhost:8080/api/product/delete/' + soupId, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            console.log(response)
+            setRerender(!rerender)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Table>
             <TableHeader>
@@ -74,6 +90,7 @@ export function SoupTable() {
                     <TableHead>Price</TableHead>
                     <TableHead>Description</TableHead>
                     <TableHead>In menu</TableHead>
+                    <TableHead></TableHead>
                     <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
@@ -90,6 +107,11 @@ export function SoupTable() {
                                 <Button onClick={() => deactivate(soup.productId)}>Deactivate</Button> :
                                 <Button onClick={() => activate(soup.productId)}>Activate</Button>
                             }
+                        </TableCell>
+                        <TableCell>
+                            <Button onClick={() => remove(soup.productId)} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                Delete
+                            </Button>
                         </TableCell>
                     </TableRow>
                 ))}

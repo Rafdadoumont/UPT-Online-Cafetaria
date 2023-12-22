@@ -1,5 +1,12 @@
 package upt.cafetaria.backend.controller;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import upt.cafetaria.backend.model.web.*;
+import upt.cafetaria.backend.service.AuthenticationService;
+
 /**
  * Handles authentication-related operations for users.
  * Provides endpoints for user registration, login, token refresh, and token validation.
@@ -10,16 +17,6 @@ package upt.cafetaria.backend.controller;
  * - /refresh-token: POST request to refresh user access tokens.
  * - /validate: GET request to validate user access tokens.
  */
-
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import upt.cafetaria.backend.model.web.*;
-import upt.cafetaria.backend.service.AuthenticationService;
-
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor

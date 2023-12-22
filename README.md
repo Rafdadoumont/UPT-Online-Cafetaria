@@ -24,15 +24,24 @@ First, you need to create a Next.js app in this directory. In a terminal, execut
 #### 2) Run server
 Start the development server by opening a terminal in the `frontend` folder and running:
 
-We will be running the back-end on port `8080`. = default for Spring.
-We will be running the front-end on port `3000`. = default for React.
+> We will be running the front-end on port `3000`. = default for React.
 
 ```bash
-npm run start
+npm run build 
 # or
-yarn start
+yarn build
 # or
-pnpm start
+pnpm build
+```
+
+AND THEN
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -51,6 +60,13 @@ To learn more about Next.js and React, take a look at the following resources:
 
 ## Backend 
 #### Framework: Spring Boot
+
+### *Getting started with the back-end*
+> Run the class *"BackendApplication"*
+
+> We will be running the back-end on port `8080`. = default for Spring.
+
+
 ### Documentation
 All API endpoints are testable with the Swagger UI accessable on:
 http://localhost:8080/swagger-ui/index.html#/

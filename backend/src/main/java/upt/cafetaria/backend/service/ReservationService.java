@@ -78,4 +78,10 @@ public class ReservationService {
         return availableTimes;
     }
 
+    public Reservation toggleFulfill(Long id) {
+        Reservation reservation = getReservation(id);
+
+        reservation.setFulfilled(!reservation.isFulfilled());
+        return reservationRepository.save(reservation);
+    }
 }

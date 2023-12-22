@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -27,10 +26,8 @@ import upt.cafetaria.backend.model.enums.RoleEnum;
 import upt.cafetaria.backend.repository.UserRepository;
 import upt.cafetaria.backend.security.JwtAuthenticationFilter;
 import upt.cafetaria.backend.service.JwtService;
-
 import java.time.Instant;
 import java.util.List;
-
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration

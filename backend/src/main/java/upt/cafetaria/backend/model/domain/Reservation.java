@@ -16,6 +16,7 @@ import java.util.List;
 /**
  *Defining this class as an entity to map it to database.
  *
+ * @author Jan
  */
 @Entity
 @Getter
@@ -25,6 +26,7 @@ public class Reservation {
 
     /**
      *Create new field "id" that is used as primary key and automatically assign unique value.
+     *
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +40,9 @@ public class Reservation {
 
     private boolean fulfilled;
 
+    //TO-BE ADDED LATER ON
+    //private String paymentMethod;
+
     /**
      * Creating many-to-one relation to user.
      */
@@ -47,7 +52,7 @@ public class Reservation {
     private User user;
 
     /**
-     *Creating many-to-many relation with products.
+     * Creating many-to-many relation with products.
      */
     @ManyToMany
     @JoinTable(

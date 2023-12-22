@@ -22,7 +22,6 @@ import java.util.List;
  * - /available-times: GET request to retrieve available times for reservations.
  * - /add: POST request to add a new reservation.
  */
-
 @RestController
 @RequestMapping("api/reservation")
 public class ReservationController {
@@ -46,6 +45,17 @@ public class ReservationController {
     @GetMapping("/user/{id}/fulfilled")
     List<Reservation> getFulfilledReservationsByUserId(@PathVariable long id) {
         return reservationService.getFulfilledReservationsByUserId(id);
+    }
+
+    /**
+     * Toggles the fulfillment status of a reservation.
+     * When fulfillment is set to true, this method sets it to false and vice versa.
+     * @param id ID of the reservation
+     * @return Reservation object with fulfillment status toggled
+     */
+    @PutMapping("/toggle-fulfill/{id}")
+    Reservation toggleFulfill(@PathVariable Long id) {
+        return reservationService.toggleFulfill(id);
     }
 
     @GetMapping("/available-times")

@@ -1,15 +1,16 @@
 package upt.cafetaria.backend.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import upt.cafetaria.backend.model.enums.RoleEnum;
-
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
+import upt.cafetaria.backend.model.Cafetaria;
 
 /**
  * Defining this class as an entity to map it to database.
@@ -28,6 +29,7 @@ import java.util.List;
 @Builder
 @Table(name = "`USER`")
 public class User implements UserDetails {
+
     /**
      *Create new field "userId" that is used as primary key and automatically assign unique value.
      */
@@ -44,6 +46,11 @@ public class User implements UserDetails {
     private String password;
 
     private Instant created;
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "cafetaria_id")
+    private Cafetaria cafetaria;
 
     /**
      * Create field "role" and specify that RoleEnum is stored as string.

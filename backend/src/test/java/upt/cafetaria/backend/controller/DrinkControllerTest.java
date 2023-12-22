@@ -3,7 +3,6 @@ package upt.cafetaria.backend.controller;
 import org.springframework.security.core.token.TokenService;
 import upt.cafetaria.backend.BackendApplication;
 import upt.cafetaria.backend.domain.DrinkBuilder;
-import upt.cafetaria.backend.domain.DrinkBuilder;
 import upt.cafetaria.backend.model.domain.Drink;
 import upt.cafetaria.backend.service.AuthenticationService;
 import upt.cafetaria.backend.service.DrinkService;
@@ -44,15 +43,17 @@ public class DrinkControllerTest {
     private Drink newDrink1, newDrink2;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         newDrink1 = DrinkBuilder.newDrink1().build();
         newDrink2 = DrinkBuilder.newDrink2().build();
-    };
+    }
+
+    ;
 
     @Test
     public void allDrinks_IfReturn_allDrink() throws Exception {
         //Given
-        List<Drink> newDrink =  Arrays.asList(newDrink1, newDrink2);
+        List<Drink> newDrink = Arrays.asList(newDrink1, newDrink2);
 
         // Mocking
         given(service.getDrinks()).willReturn(newDrink);
@@ -68,23 +69,32 @@ public class DrinkControllerTest {
                 .andExpect(jsonPath("$[0].price", Is.is(newDrink1.getPrice())))
                 .andExpect(jsonPath("$[0].description", Is.is(newDrink1.getDescription())));
 
-    };
-    @Test
-    public void addDrink_IfAddDrink() throws Exception{
+    }
 
-    };
+
 
     @Test
-    public void updateDrink_IfReturnUpdatedDrink() throws Exception{
+    public void addDrink_IfAddDrink() throws Exception {
 
-    };
-    @Test
-    public void deleteDrink_IfDeletedDrink() throws Exception{
+    }
 
-    };
+
 
     @Test
-    public void allSugarLevels_IfReturnSugarLevel() throws Exception{
+    public void updateDrink_IfReturnUpdatedDrink() throws Exception {
 
-    };
+    }
+
+
+
+    @Test
+    public void deleteDrink_IfDeletedDrink() throws Exception {
+
+    }
+
+    @Test
+    public void allSugarLevels_IfReturnSugarLevel () throws Exception {
+
+    }
+
 }

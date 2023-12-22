@@ -9,6 +9,18 @@ import upt.cafetaria.backend.service.SoupService;
 
 import java.util.List;
 
+/**
+ * Manages CRUD(Create, Read, Update, Delete) operations for soups available in the cafeteria.
+ * Provides endpoints to retrieve all soups, add a new soup,
+ * update an existing soup, and delete a soup.
+ *
+ * Endpoints:
+ * - /all: GET request to retrieve all soups.
+ * - /add: POST request to add a new soup.
+ * - /update/{id}: PUT request to update an existing soup by ID.
+ * - /delete/{id}: DELETE request to delete a soup by ID.
+ */
+
 @RestController
 @RequestMapping("api/soup")
 public class SoupController {

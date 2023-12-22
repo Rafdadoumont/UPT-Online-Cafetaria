@@ -1,5 +1,16 @@
 package upt.cafetaria.backend.controller;
 
+/**
+ * Handles authentication-related operations for users.
+ * Provides endpoints for user registration, login, token refresh, and token validation.
+ *
+ * Endpoints:
+ * - /register: POST request for user registration.
+ * - /login: POST request for user login authentication.
+ * - /refresh-token: POST request to refresh user access tokens.
+ * - /validate: GET request to validate user access tokens.
+ */
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

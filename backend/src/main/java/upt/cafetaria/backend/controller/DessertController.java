@@ -9,6 +9,18 @@ import upt.cafetaria.backend.service.DessertService;
 
 import java.util.List;
 
+/**
+ * Manages CRUD(Create, Read, Update, Delete) operations for desserts in the cafeteria.
+ * Provides endpoints to retrieve all desserts, add a new dessert,
+ * update an existing dessert, and delete a dessert.
+ *
+ * Endpoints:
+ * - /all: GET request to retrieve all desserts.
+ * - /add: POST request to add a new dessert.
+ * - /update/{id}: PUT request to update an existing dessert by ID.
+ * - /delete/{id}: DELETE request to delete a dessert by ID.
+ */
+
 @RestController
 @RequestMapping("api/dessert")
 public class DessertController {

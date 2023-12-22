@@ -10,6 +10,17 @@ import upt.cafetaria.backend.service.ProductService;
 
 import java.util.List;
 
+/**
+ * Handles CRUD(Create, Read, Update, Delete) operations for products available in the cafeteria.
+ * Provides endpoints to retrieve all products, update a product,
+ * and delete a product with 'ADMIN' role authorization.
+ *
+ * Endpoints:
+ * - /all: GET request to retrieve all products.
+ * - /update/{id}: PUT request to update a product by ID.
+ * - /delete/{id}: DELETE request to delete a product by ID (requires 'ADMIN' role).
+ */
+
 @RestController
 @RequestMapping("api/product")
 public class ProductController {

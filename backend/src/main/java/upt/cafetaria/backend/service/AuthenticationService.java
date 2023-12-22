@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Token;
-import upt.cafetaria.backend.model.enums.RoleEnum;
 import upt.cafetaria.backend.model.enums.TokenTypeEnum;
 import upt.cafetaria.backend.model.web.*;
 import upt.cafetaria.backend.repository.TokenRepository;
 import upt.cafetaria.backend.repository.UserRepository;
 import upt.cafetaria.backend.model.domain.User;
-
 import java.time.Instant;
 import java.util.List;
 

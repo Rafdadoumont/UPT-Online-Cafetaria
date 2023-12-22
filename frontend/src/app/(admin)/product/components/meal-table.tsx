@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useState} from "react";
-import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Meal, Product} from "@/types";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Meal} from "@/types";
 import Cookies from "js-cookie";
 import {Button} from "@/components/ui/button";
 

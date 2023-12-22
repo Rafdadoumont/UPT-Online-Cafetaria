@@ -7,7 +7,6 @@ import upt.cafetaria.backend.model.domain.Drink;
 import upt.cafetaria.backend.model.enums.SugarLevelEnum;
 import upt.cafetaria.backend.model.web.DrinkDto;
 import upt.cafetaria.backend.service.DrinkService;
-
 import java.util.List;
 
 /**
@@ -21,11 +20,12 @@ import java.util.List;
  * - /update/{id}: PUT request to update an existing drink by ID.
  * - /delete/{id}: DELETE request to delete a drink by ID.
  * - /sugarlevels: GET request to retrieve all available sugar levels.
+ * @author Rúben Santos
  */
-
 @RestController
 @RequestMapping("api/drink")
 public class DrinkController {
+
     @Autowired
     private final DrinkService drinkService;
 

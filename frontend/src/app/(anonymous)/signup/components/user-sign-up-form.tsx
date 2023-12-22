@@ -1,19 +1,15 @@
 "use client"
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/navigation";
 import Cookies from "js-cookie";
-import {da} from "date-fns/locale";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {gray} from "next/dist/lib/picocolors";
 
 interface UserSignUpFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 

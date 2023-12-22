@@ -1,12 +1,10 @@
 package upt.cafetaria.backend.controller;
 
-import org.springframework.security.core.token.TokenService;
 import upt.cafetaria.backend.BackendApplication;
 import upt.cafetaria.backend.domain.DrinkBuilder;
 import upt.cafetaria.backend.model.domain.Drink;
 import upt.cafetaria.backend.service.AuthenticationService;
 import upt.cafetaria.backend.service.DrinkService;
-
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +16,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import upt.cafetaria.backend.service.DrinkService;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -48,10 +43,8 @@ public class DrinkControllerTest {
         newDrink2 = DrinkBuilder.newDrink2().build();
     }
 
-    ;
-
     @Test
-    public void allDrinks_IfReturn_allDrink() throws Exception {
+    public void givenDrinks_whenGETRequestToAllDrinks_thenAllDrinksAreReturned() throws Exception {
         //Given
         List<Drink> newDrink = Arrays.asList(newDrink1, newDrink2);
 
@@ -71,21 +64,15 @@ public class DrinkControllerTest {
 
     }
 
-
-
     @Test
     public void addDrink_IfAddDrink() throws Exception {
 
     }
 
-
-
     @Test
     public void updateDrink_IfReturnUpdatedDrink() throws Exception {
 
     }
-
-
 
     @Test
     public void deleteDrink_IfDeletedDrink() throws Exception {
@@ -96,5 +83,4 @@ public class DrinkControllerTest {
     public void allSugarLevels_IfReturnSugarLevel () throws Exception {
 
     }
-
 }

@@ -7,11 +7,11 @@ import upt.cafetaria.backend.model.domain.Meal;
 import upt.cafetaria.backend.model.enums.MealTypeEnum;
 import upt.cafetaria.backend.model.web.MealDto;
 import upt.cafetaria.backend.repository.MealRepository;
-
 import java.util.List;
 
 @Service
 public class MealService {
+
     @Autowired
     private MealRepository mealRepository;
 
@@ -33,6 +33,7 @@ public class MealService {
         meal.setDescription(dto.getDescription());
         meal.setMealType(MealTypeEnum.valueOf(dto.getMealType().toUpperCase()));
         meal.setActive(true);
+
         return mealRepository.save(meal);
     }
 

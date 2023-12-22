@@ -7,7 +7,6 @@ import upt.cafetaria.backend.model.domain.Product;
 import upt.cafetaria.backend.model.domain.Reservation;
 import upt.cafetaria.backend.model.web.ReservationDto;
 import upt.cafetaria.backend.repository.ReservationRepository;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @Service
 public class ReservationService {
+
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired

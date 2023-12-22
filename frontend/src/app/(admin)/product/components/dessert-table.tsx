@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Meal, Product} from "@/types";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import { Product} from "@/types";
 import Cookies from "js-cookie";
 import {Button} from "@/components/ui/button";
-import {de} from "date-fns/locale";
 
 interface ProductTableProps {
     products: Product[]

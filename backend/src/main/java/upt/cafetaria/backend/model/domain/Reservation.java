@@ -1,22 +1,17 @@
 package upt.cafetaria.backend.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import upt.cafetaria.backend.model.domain.Product;
-import upt.cafetaria.backend.model.domain.User;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 /**
- *Defining this class as an entity to map it to database.
- *
- * @author Jan
+ * Defining this class as an entity to map it to database.
+ * @author Jan Wieprow
  */
 @Entity
 @Getter
@@ -26,7 +21,7 @@ public class Reservation {
 
     /**
      *Create new field "id" that is used as primary key and automatically assign unique value.
-     *
+     * @author Jan Wieprow
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +40,7 @@ public class Reservation {
 
     /**
      * Creating many-to-one relation to user.
+     * @author Jan Wieprow
      */
     @ManyToOne
     @JsonBackReference
@@ -53,6 +49,7 @@ public class Reservation {
 
     /**
      * Creating many-to-many relation with products.
+     * @author Jan Wieprow
      */
     @ManyToMany
     @JoinTable(

@@ -1,13 +1,11 @@
 "use client"
 import Image from "next/image"
-
 import { cn } from "@/lib/utils"
 import {Button} from "@/components/ui/button"
 import { UserLoginForm } from "@/app/(anonymous)/login/components/user-login-form";
 import Facade from "root/public/facade.png"
 import Portucalense from "root/public/portucalense.png"
 import {useRouter} from "next/navigation";
-
 
 export default function LoginPage() {
     const router = useRouter();

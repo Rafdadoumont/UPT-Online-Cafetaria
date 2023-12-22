@@ -6,11 +6,11 @@ import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Dessert;
 import upt.cafetaria.backend.model.web.DessertDto;
 import upt.cafetaria.backend.repository.DessertRepository;
-
 import java.util.List;
 
 @Service
 public class DessertService {
+
     @Autowired
     private DessertRepository dessertRepository;
 

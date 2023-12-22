@@ -119,7 +119,6 @@ export function ReservationForm() {
         }
     }
 
-
     useEffect(() => {
         fetchAvailableTimes();
         fetchAvailableOptions('soup', setAvailableSoups);

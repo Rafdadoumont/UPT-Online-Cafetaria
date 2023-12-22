@@ -1,10 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-import {Product as ProductType, Reservation} from "@/types";
-import {DessertTable} from "@/app/(admin)/product/components/dessert-table";
-import {ProductForm} from "@/app/(admin)/product/components/product-form";
-import {Button} from "@/components/ui/button";
 import {ReservationTable} from "@/app/(user)/reservation/all/components/reservation-table";
 
 export default function ReservationPage() {
@@ -32,7 +28,6 @@ export default function ReservationPage() {
 
         fetchData();
     }, []);
-
 
     return (
         <div className="container mx-auto px-4 py-8 lg:py-16">

@@ -7,6 +7,7 @@ import lombok.Setter;
 /**
  * Defining class UserDto that connect backend and frontend.
  * Automatically creating getters and setters.
+ * @author Jan Wieprow
  */
 @Getter
 @Setter

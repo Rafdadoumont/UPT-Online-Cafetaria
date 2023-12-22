@@ -4,10 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Dessert;
-import upt.cafetaria.backend.model.domain.Soup;
 import upt.cafetaria.backend.model.web.DessertDto;
 import upt.cafetaria.backend.service.DessertService;
-
 import java.util.List;
 
 /**
@@ -20,10 +18,12 @@ import java.util.List;
  * - /add: POST request to add a new dessert.
  * - /update/{id}: PUT request to update an existing dessert by ID.
  * - /delete/{id}: DELETE request to delete a dessert by ID.
+ * @author Rúben Santos
  */
 @RestController
 @RequestMapping("api/dessert")
 public class DessertController {
+
     @Autowired
     private final DessertService dessertService;
 

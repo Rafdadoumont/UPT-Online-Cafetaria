@@ -7,11 +7,11 @@ import upt.cafetaria.backend.model.domain.Drink;
 import upt.cafetaria.backend.model.enums.SugarLevelEnum;
 import upt.cafetaria.backend.model.web.DrinkDto;
 import upt.cafetaria.backend.repository.DrinkRepository;
-
 import java.util.List;
 
 @Service
 public class DrinkService {
+
     @Autowired
     private DrinkRepository drinkRepository;
 
@@ -44,6 +44,7 @@ public class DrinkService {
         drink.setHasCaffeine(dto.isHasCaffeine());
         drink.setSugarLevel(dto.getSugarLevel());
         drink.setActive(true);
+
         return drinkRepository.save(drink);
     }
 

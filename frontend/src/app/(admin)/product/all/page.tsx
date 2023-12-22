@@ -1,14 +1,10 @@
 "use client"
-import {FormEventHandler, useEffect, useState} from "react";
-import Cookies from 'js-cookie';
-import {Meal, Product as ProductType} from "@/types";
+import { useState} from "react";
+import {Meal} from "@/types";
 import {DessertTable} from "@/app/(admin)/product/components/dessert-table";
-import {ProductForm} from "@/app/(admin)/product/components/product-form";
-import {Button} from "@/components/ui/button";
 import {MealTable} from "@/app/(admin)/product/components/meal-table";
 import {SoupTable} from "@/app/(admin)/product/components/soup-table";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
-import {Bold, Italic, Underline} from "lucide-react";
 
 export default function AllProductPage() {
     const [selectedTable, setSelectedTable] = useState<string>("Soup");

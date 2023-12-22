@@ -21,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -55,7 +54,7 @@ public class DessertControllerTest {
     }
 
     @Test
-    public void allDessert_IfReturn_allDessert() throws Exception {
+    public void givenDesserts_whenGetRequestToAllDesserts_thenReturnJSONWithAllDesserts() throws Exception {
         //Given
         List<Dessert> newDessert =  Arrays.asList(newDessert1, newDessert2);
 
@@ -76,7 +75,7 @@ public class DessertControllerTest {
     }
 
     @Test
-    public void addDessert_IfReturn_DessertWithAddedDessert() throws Exception {
+    public void givenDessert_whenPOSTRequestToAddDessert_thenDessertIsAdded() throws Exception {
         //Mocking
         given(service.addDessert(BDDMockito.any(DessertDto.class))).willReturn(newDessert4);
         //When

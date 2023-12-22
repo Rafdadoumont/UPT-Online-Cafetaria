@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Reservation, Product} from "@/types";
+import {Reservation} from "@/types";
 import Cookies from "js-cookie";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Label} from "@/components/ui/label";
@@ -28,7 +28,6 @@ export function DashboardTable() {
                 console.error("Error fetching reservations:", error);
             }
         }
-
         fetchData();
     }, [rerender]);
 

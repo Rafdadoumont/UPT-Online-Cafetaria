@@ -1,10 +1,7 @@
 package upt.cafetaria.backend.domain.model;
 
-import jakarta.validation.Valid;
 import org.junit.Test;
-import org.springframework.web.bind.annotation.RequestBody;
 import upt.cafetaria.backend.model.web.LoginRequest;
-import upt.cafetaria.backend.model.web.RefreshTokenRequest;
 
 public class AuthenticationControllerTest {
 
@@ -16,10 +13,10 @@ public class AuthenticationControllerTest {
         //When
 
         //Then
-    };
+    }
 
     @Test
-    public void authenticae_Return_Response_Entiti(){
+    public void authenticate_Return_Response_Entity(){
 
         //Given
         LoginRequest request;
@@ -28,5 +25,5 @@ public class AuthenticationControllerTest {
 
         //Then
 
-    };
+    }
 }

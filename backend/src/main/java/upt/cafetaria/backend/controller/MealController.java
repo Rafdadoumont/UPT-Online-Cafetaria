@@ -3,12 +3,10 @@ package upt.cafetaria.backend.controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import upt.cafetaria.backend.model.domain.Dessert;
 import upt.cafetaria.backend.model.domain.Meal;
 import upt.cafetaria.backend.model.enums.MealTypeEnum;
 import upt.cafetaria.backend.model.web.MealDto;
 import upt.cafetaria.backend.service.MealService;
-
 import java.util.List;
 
 /**
@@ -22,11 +20,12 @@ import java.util.List;
  * - /update/{id}: PUT request to update an existing meal by ID.
  * - /delete/{id}: DELETE request to delete a meal by ID.
  * - /mealtypes: GET request to retrieve all available meal types.
+ * @author Rúben Santos
  */
-
 @RestController
 @RequestMapping("api/meal")
 public class MealController {
+
     @Autowired
     private final MealService mealService;
 

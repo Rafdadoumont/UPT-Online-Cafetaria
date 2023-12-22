@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.List;
 /**
  * Defining class ReservationDto that connect backend and frontend.
  * Automatically creating getters and setters.
+ * @author Jan Wieprow
  */
 @Getter
 @Setter

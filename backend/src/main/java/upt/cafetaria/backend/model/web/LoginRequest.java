@@ -6,6 +6,7 @@ import lombok.*;
 /**
  * Defining class LoginRequest that connect backend and frontend.
  * Automatically creating getters and setters.
+ * @author Jan Wieprow
  */
 @Getter
 @Setter

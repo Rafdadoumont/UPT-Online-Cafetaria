@@ -1,18 +1,16 @@
 package upt.cafetaria.backend.model.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
-
 import static jakarta.persistence.InheritanceType.JOINED;
 
 /**
  *Defining this class as an entity to map it to database.
+ * @author Jan Wieprow
  */
 @Entity
 @Getter
@@ -23,6 +21,7 @@ public class Product {
 
     /**
      *Create new field "id" that is used as primary key and automatically assign unique value.
+     * @author Jan Wieprow
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +37,7 @@ public class Product {
 
     /**
      * Define field that have many-to-many relation.
+     * @author Jan Wieprow
      */
     @JsonIgnore
     @ManyToMany(mappedBy = "products")

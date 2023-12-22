@@ -6,11 +6,11 @@ import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.Soup;
 import upt.cafetaria.backend.model.web.SoupDto;
 import upt.cafetaria.backend.repository.SoupRepository;
-
 import java.util.List;
 
 @Service
 public class SoupService {
+
     @Autowired
     private SoupRepository soupRepository;
 
@@ -31,6 +31,7 @@ public class SoupService {
         soup.setPrice(dto.getPrice());
         soup.setDescription(dto.getDescription());
         soup.setActive(true);
+
         return soupRepository.save(soup);
     }
 

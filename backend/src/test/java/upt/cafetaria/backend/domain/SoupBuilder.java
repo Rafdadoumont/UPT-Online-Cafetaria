@@ -10,7 +10,7 @@ public class SoupBuilder {
 
     public static SoupBuilder newSoup(){
         return new SoupBuilder();
-    };
+    }
 
     public static SoupBuilder newSoup1(){
         return  newSoup()
@@ -18,7 +18,7 @@ public class SoupBuilder {
                 .withPrice(1.0)
                 .withDescription("Information")
                 .withIsActive(true);
-    };
+    }
 
     public static SoupBuilder newSoup2(){
         return  newSoup()
@@ -26,22 +26,22 @@ public class SoupBuilder {
                 .withPrice(1.0)
                 .withDescription("Information")
                 .withIsActive(true);
-    };
+    }
 
     public SoupBuilder withName(String name){
         this.name = name;
         return this;
-    };
+    }
 
     public SoupBuilder withPrice(double price){
         this.price = price;
         return this;
-    };
+    }
 
     public SoupBuilder withDescription(String description){
         this.description = description;
         return this;
-    };
+    }
 
     public SoupBuilder withIsActive(boolean isActive){
         this.isActive = isActive;
@@ -55,5 +55,5 @@ public class SoupBuilder {
         soup.setDescription(description);
         soup.setActive(isActive);
         return soup;
-}
+    }
 }

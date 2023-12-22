@@ -1,6 +1,6 @@
 "use client"
 import React, {useEffect, useState} from "react";
-import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Product as ProductType, Product} from "@/types";
 import {Button} from "@/components/ui/button";
 import Cookies from "js-cookie";
@@ -28,7 +28,6 @@ export function SoupTable() {
                 console.error("Error refetching products:", error);
             }
         }
-
         fetchProducts();
     }, [rerender]);
 
@@ -45,7 +44,6 @@ export function SoupTable() {
             console.log(response)
             setRerender(!rerender)
         } catch (error) {
-
         }
     }
 

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Soup;
 import upt.cafetaria.backend.model.web.SoupDto;
 import upt.cafetaria.backend.service.SoupService;
-
 import java.util.List;
 
 /**
@@ -19,11 +18,12 @@ import java.util.List;
  * - /add: POST request to add a new soup.
  * - /update/{id}: PUT request to update an existing soup by ID.
  * - /delete/{id}: DELETE request to delete a soup by ID.
+ * @author Rúben Santos
  */
-
 @RestController
 @RequestMapping("api/soup")
 public class SoupController {
+
     @Autowired
     private final SoupService soupService;
 

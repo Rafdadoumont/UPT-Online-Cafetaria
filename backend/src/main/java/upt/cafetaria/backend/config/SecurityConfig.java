@@ -37,12 +37,24 @@ public class SecurityConfig {
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
+    /**
+     * This bean is used by Spring Security to load user-specific data.
+     * @exception AccessDeniedException if user does not exist.
+     * @return UserDetailsService
+     * @author Rainier Bastiaans
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> userRepository.findByEmail(email)
                 .orElseThrow(() -> new AccessDeniedException("User with email " + email + " does not exist." ));
     }
 
+    /**
+     * This bean is used by Spring Security to set an encoder for passwords.
+     * BCrypt is a password hashing function
+     * @return PasswordEncoder
+     * @author Rainier Bastiaans
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -61,6 +73,11 @@ public class SecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
+    /**
+     * This bean is used by Spring Security to allow access to the H2 database console.
+     * @return WebSecurityCustomizer
+     * @author Rainier Bastiaans
+     */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
@@ -82,6 +99,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * This bean is used to disable CORS.
+     * @return CorsConfigurationSource
+     * @author Rainier Bastiaans
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -93,6 +115,10 @@ public class SecurityConfig {
         return source;
     }
 
+    /**
+     * This bean is used to create default users.
+     * @author Rainier Bastiaans
+     */
     @Bean
     public void defaultUsers() {
         User user = User.builder()

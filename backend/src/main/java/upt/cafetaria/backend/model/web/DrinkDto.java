@@ -10,6 +10,7 @@ import upt.cafetaria.backend.model.enums.SugarLevelEnum;
 /**
  * Defining class DrinkDto that connect backend and frontend.
  * Automatically creating getters and setters.
+ * @author Jan Wieprow
  */
 @Getter
 @Setter

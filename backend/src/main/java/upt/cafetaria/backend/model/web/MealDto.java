@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import upt.cafetaria.backend.model.enums.MealTypeEnum;
 
 /**
  * Defining class MealDto that connect backend and frontend.
  * Automatically creating getters and setters.
+ * @author Jan Wieprow
  */
 @Getter
 @Setter

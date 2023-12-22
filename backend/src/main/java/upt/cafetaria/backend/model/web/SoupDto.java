@@ -9,6 +9,7 @@ import lombok.Setter;
 /**
  * Defining class SoupDto that connect backend and frontend.
  * Automatically creating getters and setters.
+ * @author Jan Wieprow
  */
 @Getter
 @Setter

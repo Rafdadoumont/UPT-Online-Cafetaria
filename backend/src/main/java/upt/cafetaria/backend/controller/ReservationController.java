@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Reservation;
 import upt.cafetaria.backend.model.web.ReservationDto;
 import upt.cafetaria.backend.service.ReservationService;
-
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -21,6 +19,7 @@ import java.util.List;
  * - /user/{id}/fulfilled: GET request to retrieve fulfilled reservations by user ID.
  * - /available-times: GET request to retrieve available times for reservations.
  * - /add: POST request to add a new reservation.
+ * @author Rúben Santos
  */
 @RestController
 @RequestMapping("api/reservation")

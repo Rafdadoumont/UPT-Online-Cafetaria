@@ -6,11 +6,11 @@ import upt.cafetaria.backend.exceptions.ServiceException;
 import upt.cafetaria.backend.model.domain.User;
 import upt.cafetaria.backend.model.web.UserDto;
 import upt.cafetaria.backend.repository.UserRepository;
-
 import java.util.List;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -29,6 +29,7 @@ public class UserService {
         user.setFirstName(dto.getFirstName());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
+
         return userRepository.save(user);
     }
 
@@ -39,6 +40,7 @@ public class UserService {
         user.setFirstName(dto.getFirstName());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
+
         return userRepository.save(user);
     }
 

@@ -5,9 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import upt.cafetaria.backend.model.domain.Token;
 import upt.cafetaria.backend.model.enums.TokenTypeEnum;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {
 

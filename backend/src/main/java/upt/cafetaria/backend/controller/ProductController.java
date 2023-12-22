@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Product;
 import upt.cafetaria.backend.model.web.ProductDto;
 import upt.cafetaria.backend.service.ProductService;
-
 import java.util.List;
 
 /**
@@ -19,8 +18,8 @@ import java.util.List;
  * - /all: GET request to retrieve all products.
  * - /update/{id}: PUT request to update a product by ID.
  * - /delete/{id}: DELETE request to delete a product by ID (requires 'ADMIN' role).
+ * @author Rúben Santos
  */
-
 @RestController
 @RequestMapping("api/product")
 public class ProductController {

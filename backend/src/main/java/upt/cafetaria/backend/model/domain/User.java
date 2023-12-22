@@ -20,6 +20,7 @@ import upt.cafetaria.backend.model.Cafetaria;
  * Automatically generate constructor with all arguments.
  * Automatically generates builder pattern.
  * Specifies name of the table in the database.
+ * @author Jan Wieprow
  */
 @Entity
 @Getter
@@ -32,6 +33,7 @@ public class User implements UserDetails {
 
     /**
      *Create new field "userId" that is used as primary key and automatically assign unique value.
+     * @author Jan Wieprow
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +55,8 @@ public class User implements UserDetails {
     private Cafetaria cafetaria;
 
     /**
-     * Create field "role" and specify that RoleEnum is stored as string.
+     * Create field "role" and specify that RoleEnum is stored a String.
+     * @author Jan Wieprow
      */
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
@@ -61,6 +64,7 @@ public class User implements UserDetails {
     /**
      * Implements method to retrieve roles of users.
      * @return list of roles
+     * @author Jan Wieprow
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

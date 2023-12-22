@@ -16,11 +16,13 @@ import upt.cafetaria.backend.service.AuthenticationService;
  * - /login: POST request for user login authentication.
  * - /refresh-token: POST request to refresh user access tokens.
  * - /validate: GET request to validate user access tokens.
+ * @author Rúben Santos
  */
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
+
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
@@ -39,6 +41,13 @@ public class AuthenticationController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Refreshes user access tokens.
+     * Happens when the access token expires.
+     * @param refreshTokenRequest the refresh token request.
+     * @return the authentication response.
+     * @author Rainier Bastiaans
+     */
     @PostMapping("/refresh-token")
     public ResponseEntity<AuthenticationResponse> refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
         return ResponseEntity.ok(authenticationService.refreshToken(refreshTokenRequest));

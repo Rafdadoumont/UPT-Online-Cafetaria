@@ -66,7 +66,7 @@ export function NavigationBar() {
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <Link href="/dashboard" legacyBehavior passHref>
+                            <Link href="/dashboard/all" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     Dashboard
                                 </NavigationMenuLink>

@@ -43,7 +43,7 @@ public class DrinkService {
         drink.setSparkling(dto.isSparkling());
         drink.setHasCaffeine(dto.isHasCaffeine());
         drink.setSugarLevel(dto.getSugarLevel());
-
+        drink.setActive(true);
         return drinkRepository.save(drink);
     }
 

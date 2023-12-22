@@ -21,6 +21,10 @@ public class MealService {
         return mealRepository.findById(id).orElseThrow(() -> new ServiceException("GET", "meal.not.found"));
     }
 
+    public List<Meal> getActiveMeals() {
+        return mealRepository.findAllByActive(true);
+    }
+
     public Meal addMeal(MealDto dto) {
         Meal meal = new Meal();
 
@@ -28,6 +32,7 @@ public class MealService {
         meal.setPrice(dto.getPrice());
         meal.setDescription(dto.getDescription());
         meal.setMealType(MealTypeEnum.valueOf(dto.getMealType().toUpperCase()));
+        meal.setActive(true);
         return mealRepository.save(meal);
     }
 

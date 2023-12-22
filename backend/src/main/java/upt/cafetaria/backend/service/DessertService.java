@@ -20,12 +20,17 @@ public class DessertService {
         return dessertRepository.findById(id).orElseThrow(() -> new ServiceException("GET", "dessert.not.found"));
     }
 
+    public List<Dessert> getActiveDesserts() {
+        return dessertRepository.findAllByActive(true);
+    }
+
     public Dessert addDessert(DessertDto dto) {
         Dessert dessert = new Dessert();
 
         dessert.setName(dto.getName());
         dessert.setPrice(dto.getPrice());
         dessert.setDescription(dto.getDescription());
+        dessert.setActive(true);
         return dessertRepository.save(dessert);
     }
 

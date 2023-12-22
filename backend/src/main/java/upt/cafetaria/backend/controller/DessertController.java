@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upt.cafetaria.backend.model.domain.Dessert;
+import upt.cafetaria.backend.model.domain.Soup;
 import upt.cafetaria.backend.model.web.DessertDto;
 import upt.cafetaria.backend.service.DessertService;
 
@@ -34,6 +35,11 @@ public class DessertController {
     @GetMapping("/all")
     List<Dessert> allDesserts() {
         return dessertService.getDesserts();
+    }
+
+    @GetMapping("/active/all")
+    List<Dessert> allActiveDesserts() {
+        return dessertService.getActiveDesserts();
     }
 
     @PostMapping("/add")

@@ -36,6 +36,11 @@ public class SoupController {
         return soupService.getSoups();
     }
 
+    @GetMapping("/active/all")
+    List<Soup> allActiveSoups() {
+        return soupService.getActiveSoups();
+    }
+
     @PostMapping("/add")
     Soup addSoup(@Valid @RequestBody SoupDto soupDto) {
         return soupService.addSoup(soupDto);

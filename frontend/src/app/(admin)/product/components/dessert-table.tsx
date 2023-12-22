@@ -1,12 +1,68 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Product} from "@/types";
+import {Meal, Product} from "@/types";
+import Cookies from "js-cookie";
+import {Button} from "@/components/ui/button";
 
 interface ProductTableProps {
     products: Product[]
 }
 
-export function DessertTable({products}: ProductTableProps) {
+export function DessertTable() {
+    const [desserts, setDesserts] = useState<Product[]>([]);
+    const [rerender, setRerender] = useState<boolean>()
+
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                const accessToken = Cookies.get("access-token");
+                const res = await fetch('http://localhost:8080/api/dessert/all', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                });
+                const data = await res.json();
+                setDesserts(data);
+            } catch (error) {
+                console.error("Error refetching products:", error);
+            }
+        }
+
+        fetchProducts();
+    }, [rerender]);
+
+    async function activate(soupId: number) {
+        try {
+            const accessToken = Cookies.get("access-token");
+            const response: Response = await fetch('http://localhost:8080/api/product/activate/' + soupId, {
+                method: "PUT",
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            console.log(response)
+            setRerender(!rerender)
+        } catch (error) {
+
+        }
+    }
+
+    async function deactivate(soupId: number) {
+        try {
+            const accessToken = Cookies.get("access-token");
+            const response: Response = await fetch('http://localhost:8080/api/product/deactivate/' + soupId, {
+                method: "PUT",
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            console.log(response)
+            setRerender(!rerender)
+        } catch (error) {
+
+        }
+    }
+
     return (
         <Table>
             <TableHeader>
@@ -15,15 +71,24 @@ export function DessertTable({products}: ProductTableProps) {
                     <TableHead>Name</TableHead>
                     <TableHead>Price</TableHead>
                     <TableHead>Description</TableHead>
+                    <TableHead>In menu</TableHead>
+                    <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {products.map((product) => (
+                {desserts.map((dessert) => (
                     <TableRow>
-                        <TableCell className="font-medium">{product.productId}</TableCell>
-                        <TableCell>{product.name}</TableCell>
-                        <TableCell>{product.price}</TableCell>
-                        <TableCell>{product.description}</TableCell>
+                        <TableCell className="font-medium">{dessert.productId}</TableCell>
+                        <TableCell>{dessert.name}</TableCell>
+                        <TableCell>{dessert.price}</TableCell>
+                        <TableCell>{dessert.description}</TableCell>
+                        <TableCell>{dessert.active ? "Yes" : "No"}</TableCell>
+                        <TableCell>
+                            {dessert.active ?
+                                <Button onClick={() => deactivate(dessert.productId)}>Deactivate</Button> :
+                                <Button onClick={() => activate(dessert.productId)}>Activate</Button>
+                            }
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

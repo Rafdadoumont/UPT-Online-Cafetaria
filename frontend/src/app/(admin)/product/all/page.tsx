@@ -12,48 +12,10 @@ import {Bold, Italic, Underline} from "lucide-react";
 
 export default function AllProductPage() {
     const [selectedTable, setSelectedTable] = useState<string>("Soup");
-    const [desserts, setDesserts] = useState<ProductType[]>([]);
-    const [meals, setMeals] = useState<Meal[]>([]);
-    const [soups, setSoups] = useState<ProductType[]>([]);
 
     const handleToggleChange = (value: string) => {
         setSelectedTable(value);
     };
-
-
-    useEffect(() => {
-        async function init() {
-            try {
-                const accessToken: string | undefined = Cookies.get('access-token');
-                const resDesserts = await fetch('http://localhost:8080/api/dessert/all', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                    },
-                });
-                const dataDesserts = await resDesserts.json();
-                setDesserts(dataDesserts);
-
-                const resMeals = await fetch('http://localhost:8080/api/meal/all', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                    },
-                });
-                const dataMeals = await resMeals.json();
-                setMeals(dataMeals);
-
-                const resSoups = await fetch('http://localhost:8080/api/soup/all', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                    },
-                });
-                const dataSoups = await resSoups.json();
-                setSoups(dataSoups);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        }
-        init();
-    }, []);
 
     return (
         <div className="container mx-auto px-4 py-8 lg:py-16 flex flex-col items-start">
@@ -79,9 +41,9 @@ export default function AllProductPage() {
                 </div>
             </div>
             <div className="w-full flex justify-between">
-                {selectedTable === "Soup" && <SoupTable products={soups} />}
-                {selectedTable === "Meal" && <MealTable meals={meals} />}
-                {selectedTable === "Dessert" && <DessertTable products={desserts} />}
+                {selectedTable === "Soup" && <SoupTable />}
+                {selectedTable === "Meal" && <MealTable />}
+                {selectedTable === "Dessert" && <DessertTable  />}
             </div>
         </div>
     );

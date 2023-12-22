@@ -20,12 +20,17 @@ public class SoupService {
         return soupRepository.findById(id).orElseThrow(() -> new ServiceException("GET", "soup.not.found"));
     }
 
+    public List<Soup> getActiveSoups() {
+        return soupRepository.findAllByActive(true);
+    }
+
     public Soup addSoup(SoupDto dto) {
         Soup soup = new Soup();
 
         soup.setName(dto.getName());
         soup.setPrice(dto.getPrice());
         soup.setDescription(dto.getDescription());
+        soup.setActive(true);
         return soupRepository.save(soup);
     }
 

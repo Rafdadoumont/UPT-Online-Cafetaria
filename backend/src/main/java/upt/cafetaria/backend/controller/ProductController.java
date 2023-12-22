@@ -36,6 +36,21 @@ public class ProductController {
         return productService.getProducts();
     }
 
+    @GetMapping("/active/all")
+    List<Product> allActiveProducts() {
+        return productService.getActiveProducts();
+    }
+
+    @PutMapping("/activate/{id}")
+    Product activateProduct(@PathVariable Long id) {
+        return productService.activateProduct(id);
+    }
+
+    @PutMapping("/deactivate/{id}")
+    Product deactivateProduct(@PathVariable Long id) {
+        return productService.deactivateProduct(id);
+    }
+
     @PutMapping("/update/{id}")
     Product updateProduct(@Valid @RequestBody ProductDto newProduct, @PathVariable Long id) {
         Product updatedProduct = productService.getProduct(id);

@@ -3,6 +3,7 @@ package upt.cafetaria.backend.controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import upt.cafetaria.backend.model.domain.Dessert;
 import upt.cafetaria.backend.model.domain.Meal;
 import upt.cafetaria.backend.model.enums.MealTypeEnum;
 import upt.cafetaria.backend.model.web.MealDto;
@@ -36,6 +37,11 @@ public class MealController {
     @GetMapping("/all")
     List<Meal> allMeals() {
         return mealService.getMeals();
+    }
+
+    @GetMapping("/active/all")
+    List<Meal> allActiveMeals() {
+        return mealService.getActiveMeals();
     }
 
     @PostMapping("/add")

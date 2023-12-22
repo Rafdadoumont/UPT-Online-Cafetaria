@@ -19,7 +19,9 @@ public class ProductService {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    public List<Product> getProducts() { return productRepository.findAll();}
+    public List<Product> getProducts() {
+        return productRepository.findAll();
+    }
 
     public List<Product> getProductsById(List<Long> ids) {
         return productRepository.findAllById(ids);
@@ -29,10 +31,8 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() -> new ServiceException("GET", "product.not.found"));
     }
 
-    public List<Product> getProductsByReservationId(long reservationId) {
-        return reservationRepository.findById(reservationId)
-                .map((Reservation::getProducts))
-                .orElse(Collections.emptyList());
+    public List<Product> getActiveProducts() {
+        return productRepository.findAllByActive(true);
     }
 
     public Product addProduct(ProductDto dto) {
@@ -53,6 +53,21 @@ public class ProductService {
 
         return productRepository.save(product);
     }
+
+    public Product activateProduct(Long id) {
+        Product product = getProduct(id);
+
+        product.setActive(true);
+        return productRepository.save(product);
+    }
+
+    public Product deactivateProduct(Long id) {
+        Product product = getProduct(id);
+
+        product.setActive(false);
+        return productRepository.save(product);
+    }
+
 
     public void deleteProduct(Long id) {
         productRepository.delete(getProduct(id));

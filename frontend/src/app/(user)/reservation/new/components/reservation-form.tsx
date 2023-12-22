@@ -62,7 +62,7 @@ export function ReservationForm() {
         const accessToken = Cookies.get("access-token");
 
         try {
-            const response = await fetch(`http://localhost:8080/api/${type}/all`, {
+            const response = await fetch(`http://localhost:8080/api/${type}/active/all`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
                 },

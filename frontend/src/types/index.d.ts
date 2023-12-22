@@ -10,6 +10,7 @@ export interface Product {
     name: string;
     price: number;
     description: string;
+    active: boolean;
 }
 
 export interface Meal extends Product {

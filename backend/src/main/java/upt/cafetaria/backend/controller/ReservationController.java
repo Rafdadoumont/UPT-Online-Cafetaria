@@ -10,6 +10,19 @@ import upt.cafetaria.backend.service.ReservationService;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Manages reservations for the cafeteria.
+ * Provides endpoints to retrieve all reservations, unfulfilled and fulfilled reservations by user ID,
+ * available times for reservations, and add new reservations.
+ *
+ * Endpoints:
+ * - /all: GET request to retrieve all reservations.
+ * - /user/{id}/unfulfilled: GET request to retrieve unfulfilled reservations by user ID.
+ * - /user/{id}/fulfilled: GET request to retrieve fulfilled reservations by user ID.
+ * - /available-times: GET request to retrieve available times for reservations.
+ * - /add: POST request to add a new reservation.
+ */
+
 @RestController
 @RequestMapping("api/reservation")
 public class ReservationController {

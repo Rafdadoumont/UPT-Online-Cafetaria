@@ -10,6 +10,19 @@ import upt.cafetaria.backend.service.DrinkService;
 
 import java.util.List;
 
+/**
+ * Manages CRUD(Create, Read, Update, Delete) operations for drinks available in the cafeteria.
+ * Provides endpoints to retrieve all drinks, add a new drink,
+ * update an existing drink, delete a drink, and retrieve all sugar levels.
+ *
+ * Endpoints:
+ * - /all: GET request to retrieve all drinks.
+ * - /add: POST request to add a new drink.
+ * - /update/{id}: PUT request to update an existing drink by ID.
+ * - /delete/{id}: DELETE request to delete a drink by ID.
+ * - /sugarlevels: GET request to retrieve all available sugar levels.
+ */
+
 @RestController
 @RequestMapping("api/drink")
 public class DrinkController {

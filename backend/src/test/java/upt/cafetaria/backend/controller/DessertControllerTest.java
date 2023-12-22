@@ -77,8 +77,6 @@ public class DessertControllerTest {
 
     @Test
     public void addDessert_IfReturn_DessertWithAddedDessert() throws Exception {
-        //Given
-        newDessert4 = newDessert4;
         //Mocking
         given(service.addDessert(BDDMockito.any(DessertDto.class))).willReturn(newDessert4);
         //When

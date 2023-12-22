@@ -10,6 +10,19 @@ import upt.cafetaria.backend.service.MealService;
 
 import java.util.List;
 
+/**
+ * Manages CRUD(Create, Read, Update, Delete) operations for meals offered in the cafeteria.
+ * Provides endpoints to retrieve all meals, add a new meal,
+ * update an existing meal, delete a meal, and retrieve all meal types.
+ *
+ * Endpoints:
+ * - /all: GET request to retrieve all meals.
+ * - /add: POST request to add a new meal.
+ * - /update/{id}: PUT request to update an existing meal by ID.
+ * - /delete/{id}: DELETE request to delete a meal by ID.
+ * - /mealtypes: GET request to retrieve all available meal types.
+ */
+
 @RestController
 @RequestMapping("api/meal")
 public class MealController {

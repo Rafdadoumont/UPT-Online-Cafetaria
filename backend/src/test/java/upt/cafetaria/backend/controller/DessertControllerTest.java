@@ -22,8 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -94,14 +93,37 @@ public class DessertControllerTest {
     @Test
     public void updateDessert_IfReturn_updatedDessert() throws Exception{
         //Given
+            long dessertId = 1;
         //Mocking
+        given(service.getDessert(dessertId)).willReturn(newDessert1);
+        given(service.updateDessert(dessertId, newDessert3)).willReturn(newDessert4);
         //When
-        //Then
-
+        DessertController.perform(put("/api/dessert/update/{id}", dessertId)
+                        .header("Authorization", "Bearer " + authService.getAccessTokenForTesting())
+                        .content(mapper.writeValueAsString(newDessert3))
+                        .contentType(MediaType.APPLICATION_JSON))
+                // Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", Is.is(newDessert4.getName())))
+                .andExpect(jsonPath("$.price", Is.is(newDessert4.getPrice())))
+                .andExpect(jsonPath("$.description", Is.is(newDessert4.getDescription())));
     }
 
     @Test
-    public void deleteDessert_IfReturn_DessertWithDeletedPostion() throws Exception{
+    public void deleteDessert_IfReturn_deletedDessert() throws Exception {
+        // Given
+        long dessertId = 1;
+        given(service.getDessert(dessertId)).willReturn(newDessert1);
 
+        // When
+        DessertController.perform(delete("/api/dessert/delete/{id}", dessertId)
+                        .header("Authorization", "Bearer " + authService.getAccessTokenForTesting()))
+                // Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", Is.is(newDessert1.getName())))
+                .andExpect(jsonPath("$.price", Is.is(newDessert1.getPrice())))
+                .andExpect(jsonPath("$.description", Is.is(newDessert1.getDescription())));
     }
 }

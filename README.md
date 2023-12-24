@@ -70,3 +70,7 @@ To learn more about Next.js and React, take a look at the following resources:
 ### Documentation
 All API endpoints are testable with the Swagger UI accessable on:
 http://localhost:8080/swagger-ui/index.html#/
+
+## ERD
+![image](https://github.com/Rafdadoumont/UPT-Online-Cafetaria/assets/78793435/01fead0c-d8e9-47fd-838a-64e76a1a0608)
+

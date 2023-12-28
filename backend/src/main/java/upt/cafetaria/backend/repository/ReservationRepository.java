@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findByUserUserIdAndFulfilledOrderByReservationDateDescReservationTimeDesc(Long userId, boolean fulfilled);
+
+    List<Reservation> findAllByFulfilledOrderByReservationDateDescReservationTimeDesc(boolean fulfilled);
+
 }

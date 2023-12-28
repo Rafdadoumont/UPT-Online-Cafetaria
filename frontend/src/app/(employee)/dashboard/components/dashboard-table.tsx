@@ -6,10 +6,10 @@ import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
 
 interface DashboardTableProps {
-    reservations: Reservation[]
+    fulfilled: boolean
 }
 
-export function DashboardTable() {
+export function DashboardTable({fulfilled}: DashboardTableProps) {
     const [reservations , setReservations] = useState<Reservation[]>([]);
     const [rerender, setRerender] = useState<boolean>()
 
@@ -17,13 +17,23 @@ export function DashboardTable() {
         async function fetchData() {
             try {
                 const accessToken: String | undefined = Cookies.get('access-token');
-                const res = await fetch('http://localhost:8080/api/reservation/all', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                    },
-                });
-                const data = await res.json();
-                setReservations(data);
+                if(fulfilled){
+                    const res = await fetch('http://localhost:8080/api/reservation/all/fulfilled', {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                        },
+                    });
+                    const data = await res.json();
+                    setReservations(data);
+                } else {
+                    const res = await fetch('http://localhost:8080/api/reservation/all/unfulfilled', {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                        },
+                    });
+                    const data = await res.json();
+                    setReservations(data);
+                }
             } catch (error) {
                 console.error("Error fetching reservations:", error);
             }

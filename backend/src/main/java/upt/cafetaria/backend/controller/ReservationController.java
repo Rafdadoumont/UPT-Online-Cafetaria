@@ -46,6 +46,16 @@ public class ReservationController {
         return reservationService.getFulfilledReservationsByUserId(id);
     }
 
+    @GetMapping("/all/fulfilled")
+    List<Reservation> getFulfilledReservations() {
+        return reservationService.getFulfilledReservations();
+    }
+
+    @GetMapping("/all/unfulfilled")
+    List<Reservation> getUnfulfilledReservations() {
+        return reservationService.getUnfulfilledReservations();
+    }
+
     /**
      * Toggles the fulfillment status of a reservation.
      * When fulfillment is set to true, this method sets it to false and vice versa.

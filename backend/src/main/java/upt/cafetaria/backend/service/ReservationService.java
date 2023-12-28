@@ -26,6 +26,14 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
+    public List<Reservation> getUnfulfilledReservations() {
+        return reservationRepository.findAllByFulfilledOrderByReservationDateDescReservationTimeDesc(false);
+    }
+
+    public List<Reservation> getFulfilledReservations() {
+        return reservationRepository.findAllByFulfilledOrderByReservationDateDescReservationTimeDesc(true);
+    }
+
     public List<Reservation> getUnfulfilledReservationsByUserId(long id) {
         return reservationRepository.findByUserUserIdAndFulfilledOrderByReservationDateDescReservationTimeDesc(id, false);
     }
